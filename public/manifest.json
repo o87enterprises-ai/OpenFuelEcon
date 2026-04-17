@@ -1,0 +1,87 @@
+{
+  "name": "FuelEcon — Fuel Economy for Dummies",
+  "short_name": "FuelEcon",
+  "description": "Plain-English gas cost calculator. Type your car, your trip, get your real cost and the tweaks that save fuel.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#FDF8EE",
+  "theme_color": "#1A5F3F",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["utilities", "finance", "productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculate trip cost",
+      "short_name": "Trip",
+      "description": "Work out what a drive actually costs",
+      "url": "/?action=trip",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "MPG converter",
+      "short_name": "MPG",
+      "description": "MPG to L/100km and back",
+      "url": "/mpg-converter",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Split fuel cost",
+      "short_name": "Split",
+      "description": "Divide gas money with roommates or riders",
+      "url": "/split-fuel",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "FuelEcon trip calculator on mobile"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "FuelEcon dashboard on desktop"
+    }
+  ],
+  "prefer_related_applications": false
+}

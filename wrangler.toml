@@ -1,0 +1,50 @@
+# ========================================================
+# FuelEcon · Cloudflare Pages configuration
+# Deploy: wrangler pages deploy public
+# Dev:    wrangler pages dev public
+# ========================================================
+
+name = "fuelecon"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./public"
+
+# --------------------------------------------------------
+# Environment variables (non-secret)
+# --------------------------------------------------------
+[vars]
+ENVIRONMENT = "production"
+SITE_URL = "https://fuelecon.pages.dev"
+# API_VERSION bumps when /api/ contract changes
+API_VERSION = "1"
+
+[env.preview.vars]
+ENVIRONMENT = "preview"
+SITE_URL = "https://preview.fuelecon.pages.dev"
+API_VERSION = "1"
+
+# --------------------------------------------------------
+# Phase 3 additions (uncomment when Worker API lands)
+# --------------------------------------------------------
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "fuelecon-db"
+# database_id = "REPLACE_WITH_D1_ID_FROM_DASHBOARD"
+# migrations_dir = "./schema"
+
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "REPLACE_WITH_KV_ID"
+
+# --------------------------------------------------------
+# Phase 4 addition (daily maintenance agent)
+# Cron runs at 06:00 UTC — runs against a separate Worker,
+# not this Pages project. See agent/wrangler.toml.
+# --------------------------------------------------------
+
+# --------------------------------------------------------
+# Secrets (set via `wrangler pages secret put <NAME>`)
+#   EIA_API_KEY        — gas prices (eia.gov)
+#   GOOGLE_INDEXING_KEY — Indexing API for daily agent pings
+#   ADSENSE_CLIENT_ID  — AdSense publisher ID after approval
+# --------------------------------------------------------

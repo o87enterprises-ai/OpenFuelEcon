@@ -1,0 +1,37 @@
+{
+  "name": "fuelecon",
+  "version": "0.1.0",
+  "description": "FuelEcon — plain-English fuel economy calculator. Cloudflare Pages + Functions + MCP.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev public --compatibility-date=2024-11-01",
+    "deploy": "wrangler pages deploy public --project-name=fuelecon",
+    "deploy:preview": "wrangler pages deploy public --project-name=fuelecon --branch=preview",
+    "tail": "wrangler pages deployment tail --project-name=fuelecon",
+    "lint:html": "echo 'Phase 3 will add html-validate here'",
+    "icons:regenerate": "python3 scripts/generate-icons.py"
+  },
+  "keywords": [
+    "fuel-economy",
+    "gas-calculator",
+    "mpg",
+    "cloudflare-pages",
+    "pwa",
+    "utility-site",
+    "mcp-server"
+  ],
+  "author": "o87Dev",
+  "license": "MIT",
+  "homepage": "https://fuelecon.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/o87enterprises-ai/fuelecon.git"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

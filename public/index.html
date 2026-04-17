@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1A5F3F">
+
+  <!-- ================= SEO FOUNDATION ================= -->
+  <title>FuelEcon — Fuel Economy for Dummies | Plain-English Gas Cost Calculator</title>
+  <meta name="description" content="Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, trip cost, and the easy tweaks that save gas — no mpg maths degree required.">
+  <meta name="keywords" content="fuel economy calculator, gas cost calculator, mpg calculator, trip fuel cost, fuel economy for dummies, road trip gas calculator">
+  <link rel="canonical" href="https://fuelecon.pages.dev/">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FuelEcon">
+  <meta property="og:title" content="FuelEcon — Fuel Economy for Dummies">
+  <meta property="og:description" content="The plain-English gas cost calculator. Type your car, your trip, get your real cost and the tweaks that save fuel.">
+  <meta property="og:url" content="https://fuelecon.pages.dev/">
+  <meta property="og:image" content="https://fuelecon.pages.dev/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FuelEcon — Fuel Economy for Dummies">
+  <meta name="twitter:description" content="Plain-English gas cost calculator. No mpg maths degree required.">
+  <meta name="twitter:image" content="https://fuelecon.pages.dev/og-image.png">
+
+  <!-- PWA (manifest + service worker wired in Batch 2) -->
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- AdSense placeholder (activate after approval in Phase 5) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <!-- Fonts + Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Schema.org WebApplication (Batch 3 will add FAQPage + HowTo) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "FuelEcon",
+    "alternateName": "Fuel Economy for Dummies",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "url": "https://fuelecon.pages.dev/",
+    "description": "Plain-English fuel economy and trip cost calculator.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <style>
+    /* =========================================================
+       FuelEcon Design Tokens — Phase 1 palette
+       ========================================================= */
+    :root {
+      --c-primary:    #1A5F3F;   /* forest green — trust, eco, savings */
+      --c-primary-dk: #0F4028;
+      --c-secondary:  #F4A52D;   /* signal amber — fuel, energy, CTA */
+      --c-accent:     #B8E23A;   /* electric lime — savings highlights */
+      --c-ink:        #1B2430;   /* slate — body text, dark widget */
+      --c-ink-soft:   #4a5a6a;
+      --c-muted:      #6b7a88;
+      --c-paper:      #FDF8EE;   /* warm cream — friendly page bg */
+      --c-card:       #FFFFFF;
+      --c-success:    #4EC28A;   /* mint — green-zone active */
+      --c-warn:       #D96F3C;   /* rust — under-inflated, alerts */
+      --c-border:     #ece3cf;   /* cream-tinted border */
+      --c-tip-bg:     #FFF6E1;   /* amber-wash for tip cards */
+      --c-result-bg:  #EEF6F0;   /* mint-wash for result box */
+
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --shadow-card: 0 8px 24px rgba(27,36,48,0.05), 0 2px 6px rgba(27,36,48,0.04);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--c-paper);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      padding: 24px 20px 60px;
+      color: var(--c-ink);
+      line-height: 1.5;
+    }
+
+    .container { max-width: 1300px; margin: 0 auto; }
+
+    /* ---------- Header ---------- */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    h1 {
+      font-weight: 800;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--c-primary), var(--c-success));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    h1 i { -webkit-text-fill-color: var(--c-primary); }
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--c-ink-soft);
+      font-weight: 500;
+    }
+    .premium-badge {
+      background: linear-gradient(135deg, #FFF3D6, #FFE0A8);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #8B4F0F;
+      border: 1px solid #F4A52D;
+      white-space: nowrap;
+    }
+    .premium-badge i { margin-right: 6px; color: #D99A1F; }
+
+    /* ---------- Layout ---------- */
+    .dashboard { display: flex; flex-wrap: wrap; gap: 28px; }
+    .main-panel { flex: 2; min-width: 280px; }
+    .sidebar    { flex: 1.2; min-width: 260px; }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: var(--c-card);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--c-border);
+    }
+    .card-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 4px solid var(--c-primary);
+      padding-left: 14px;
+      color: var(--c-ink);
+    }
+    .card-blurb {
+      font-size: 0.9rem;
+      color: var(--c-muted);
+      margin: 0 0 18px 18px;
+    }
+
+    /* ---------- Inputs ---------- */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--c-ink-soft);
+    }
+    input, select {
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--c-border);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      background: white;
+      color: var(--c-ink);
+      transition: 0.2s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 3px rgba(26,95,63,0.15);
+    }
+    input[type="range"] {
+      padding: 6px 0;
+      accent-color: var(--c-primary);
+    }
+    .row-2 { display: flex; gap: 16px; flex-wrap: wrap; }
+    .row-2 > div { flex: 1; min-width: 180px; }
+    .row-3 { display: flex; gap: 12px; flex-wrap: wrap; }
+    .row-3 > div { flex: 1; min-width: 140px; }
+
+    /* ---------- Preset picker ---------- */
+    .preset-picker {
+      background: linear-gradient(135deg, #F4FBF7, #FDF8EE);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 18px;
+    }
+    .preset-picker h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--c-primary);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .preset-picker .sub {
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      margin-bottom: 12px;
+    }
+    select:disabled {
+      background: #f5f2e9;
+      color: var(--c-muted);
+      cursor: not-allowed;
+    }
+    .preset-result {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: white;
+      border: 1.5px dashed var(--c-primary);
+      border-radius: var(--radius-sm);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .preset-result.visible { display: flex; }
+    .preset-result-text {
+      font-size: 0.9rem;
+      color: var(--c-ink);
+    }
+    .preset-result-text strong {
+      color: var(--c-primary);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+    .preset-result button {
+      padding: 8px 16px;
+      font-size: 0.82rem;
+    }
+    .ev-notice {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--c-muted);
+      text-align: center;
+    }
+    .ev-notice a {
+      color: var(--c-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .ev-notice a:hover { text-decoration: underline; }
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+      font-size: 0.8rem;
+      color: var(--c-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .or-divider::before, .or-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--c-border);
+    }
+
+    /* ---------- Buttons ---------- */
+    button {
+      background: var(--c-primary);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    button:hover { background: var(--c-primary-dk); transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+    button.secondary { background: transparent; color: var(--c-primary); border: 1.5px solid var(--c-primary); }
+    button.secondary:hover { background: var(--c-primary); color: white; }
+    button.amber { background: var(--c-secondary); color: var(--c-ink); }
+    button.amber:hover { background: #E0961F; color: var(--c-ink); }
+
+    /* ---------- Result ---------- */
+    .result-box {
+      background: var(--c-result-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-top: 16px;
+      border: 1px solid #d5e8dc;
+    }
+    .fuel-cost {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--c-primary);
+      letter-spacing: -0.5px;
+    }
+    .eco-tip {
+      background: var(--c-tip-bg);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin: 10px 0;
+      border-left: 5px solid var(--c-secondary);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .eco-tip i { color: var(--c-secondary); margin-right: 4px; }
+
+    /* ---------- Widget (sidebar) ---------- */
+    .widget-live {
+      background: var(--c-ink);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      color: white;
+    }
+    .widget-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    .widget-row strong { color: var(--c-accent); }
+    .green-zone {
+      border-radius: 40px;
+      padding: 12px;
+      text-align: center;
+      font-weight: 700;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+    .green-zone.active   { background: var(--c-success); color: var(--c-ink); }
+    .green-zone.moderate { background: var(--c-secondary); color: var(--c-ink); }
+    .green-zone.poor     { background: var(--c-warn); color: white; }
+    .widget-footnote {
+      font-size: 0.72rem;
+      text-align: center;
+      margin-top: 12px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ---------- Saved vehicles ---------- */
+    .saved-vehicles { margin-top: 14px; }
+    .vehicle-item {
+      background: var(--c-paper);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      border: 1px solid var(--c-border);
+    }
+    .badge-sm {
+      font-size: 0.7rem;
+      background: rgba(78,194,138,0.18);
+      color: var(--c-primary-dk);
+      padding: 4px 10px;
+      border-radius: 50px;
+      margin-left: 6px;
+    }
+    .vehicle-item button {
+      padding: 6px 12px;
+      font-size: 0.72rem;
+      border-radius: 20px;
+    }
+
+    /* ---------- Footer (AdSense prerequisites) ---------- */
+    .site-footer {
+      margin-top: 48px;
+      padding: 28px 24px;
+      background: var(--c-ink);
+      color: #c8d0d8;
+      border-radius: var(--radius-lg);
+      font-size: 0.88rem;
+    }
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+    .footer-col a {
+      display: block;
+      color: #c8d0d8;
+      text-decoration: none;
+      padding: 4px 0;
+      transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--c-accent); }
+    .footer-legal {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 20px;
+      padding-top: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #8a96a2;
+    }
+
+    @media (max-width: 780px) {
+      body { padding: 16px 12px 40px; }
+      .card { padding: 18px; border-radius: 22px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+    <div class="brand">
+      <h1><i class="fas fa-leaf"></i> FuelEcon</h1>
+      <span class="tagline">Fuel economy for dummies · plain English, zero jargon</span>
+    </div>
+    <div class="premium-badge" id="premiumStatusBadge">
+      <i class="fas fa-crown"></i> PREMIUM · Live Green Zone Active
+    </div>
+  </header>
+
+  <div class="dashboard">
+
+    <!-- ================= MAIN PANEL ================= -->
+    <div class="main-panel">
+
+      <!-- Vehicle -->
+      <section class="card" aria-labelledby="vehicle-heading">
+        <h2 id="vehicle-heading" class="card-title"><i class="fas fa-car"></i> What are you driving?</h2>
+        <p class="card-blurb">Don't know your MPG? Pick your car from the dropdowns — we'll fill it in.</p>
+
+        <!-- Preset picker (for Dummies path) -->
+        <div class="preset-picker">
+          <h3><i class="fas fa-magic"></i> Quick pick your car</h3>
+          <p class="sub">No mpg sheet handy? Select make → engine → drivetrain.</p>
+          <div class="row-3">
+            <div class="input-group" style="margin-bottom: 0;">
+              <label for="presetMake">Make</label>
+              <select id="presetMake">
+                <option value="">Pick make…</option>
+              </select>
+            </div>
+            <div class="input-group" style="margin-bottom: 0;">
+              <label for="presetEngine">Engine</label>
+              <select id="presetEngine" disabled>
+                <option value="">Pick make first</option>
+              </select>
+            </div>
+            <div class="input-group" style="margin-bottom: 0;">
+              <label for="presetDrivetrain">Drivetrain</label>
+              <select id="presetDrivetrain" disabled>
+                <option value="">Pick engine first</option>
+              </select>
+            </div>
+          </div>
+          <div class="preset-result" id="presetResult">
+            <div class="preset-result-text">
+              📊 Average MPG for this car: <strong id="presetMpg">--</strong>
+              <span style="color: var(--c-muted); font-size: 0.78rem;">(EPA estimate)</span>
+            </div>
+            <button id="applyPresetBtn" class="amber"><i class="fas fa-check"></i> Use this MPG</button>
+          </div>
+          <div class="ev-notice">
+            ⚡ Driving an EV? Gas calc doesn't apply — <a href="/ev-vs-gas">use our EV cost tool</a>.
+          </div>
+        </div>
+
+        <div class="or-divider">or enter your own</div>
+
+        <div class="row-2">
+          <div class="input-group">
+            <label for="mpgInput"><i class="fas fa-tachometer-alt"></i> Fuel economy (MPG)</label>
+            <input type="number" id="mpgInput" step="0.5" value="28.5" min="1" max="200">
+          </div>
+          <div class="input-group">
+            <label for="gasPriceInput"><i class="fas fa-gas-pump"></i> Gas price ($ / gal)</label>
+            <input type="number" id="gasPriceInput" step="0.05" value="3.65" min="0.1">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="vehicleName"><i class="fas fa-road"></i> Nickname for this car</label>
+          <input type="text" id="vehicleName" placeholder="e.g. Honda Civic 2022" value="Toyota Prius">
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px;">
+          <button id="saveVehicleBtn"><i class="fas fa-save"></i> Save this car</button>
+          <button id="loadDefaultBtn" class="secondary"><i class="fas fa-undo-alt"></i> Reset</button>
+        </div>
+
+        <div class="saved-vehicles" id="savedVehiclesList"></div>
+      </section>
+
+      <!-- Trip -->
+      <section class="card" aria-labelledby="trip-heading">
+        <h2 id="trip-heading" class="card-title"><i class="fas fa-map-marked-alt"></i> How far are you going?</h2>
+        <p class="card-blurb">Slide to set the distance, pick your route, and we'll show what the drive actually costs.</p>
+
+        <div class="row-2">
+          <div class="input-group">
+            <label for="startLoc">📍 Starting from</label>
+            <input type="text" id="startLoc" placeholder="Home, 123 Main St" value="Downtown">
+          </div>
+          <div class="input-group">
+            <label for="endLoc">🏁 Going to</label>
+            <input type="text" id="endLoc" placeholder="Airport" value="Airport">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="distanceSlider">📏 Distance (miles)</label>
+          <input type="range" id="distanceSlider" min="1" max="500" value="124" step="1">
+          <input type="number" id="distanceMiles" value="124" step="1" min="1" style="margin-top: 8px;">
+        </div>
+
+        <div class="row-2">
+          <div class="input-group">
+            <label for="routeType"><i class="fas fa-route"></i> Route type</label>
+            <select id="routeType">
+              <option value="highway">🛣️ Freeway / Highway (best MPG)</option>
+              <option value="backroads">🌲 Back roads / City (lower MPG)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="tireBooster"><i class="fas fa-wind"></i> Tire pressure</label>
+            <select id="tireBooster">
+              <option value="optimal">✅ Optimal (+5% economy)</option>
+              <option value="low">⚠️ Under-inflated (-8% economy)</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="calculateBtn" class="amber"><i class="fas fa-calculator"></i> Work out this trip</button>
+
+        <div class="result-box" id="resultPanel">
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <span><strong>⛽ Fuel needed:</strong> <span id="fuelGallons">0.00</span> gal</span>
+            <span><strong>💰 Trip cost:</strong> <span id="tripCost" class="fuel-cost">$0.00</span></span>
+          </div>
+          <div style="margin-top: 12px;"><strong>🌱 Effective MPG:</strong> <span id="effectiveMpg">--</span> mpg</div>
+          <div id="ecoAdvice" class="eco-tip" style="margin-top: 16px;">
+            <i class="fas fa-lightbulb"></i> Tips will appear once you run a trip.
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ================= SIDEBAR ================= -->
+    <div class="sidebar">
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-charging-station"></i> Live widget</h2>
+        <p class="card-blurb">Pin it to your home screen — updates as you drive.</p>
+        <div id="liveWidgetContainer"></div>
+        <div style="font-size: 0.75rem; text-align: center; margin-top: 12px; color: var(--c-muted);">
+          <i class="fas fa-mobile-alt"></i> PWA-ready · installable
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-leaf"></i> Gas-saving tips</h2>
+        <p class="card-blurb">Small tweaks, real savings — written for humans.</p>
+        <div id="dynamicTips">
+          <div class="eco-tip"><i class="fas fa-tachometer-alt"></i> Freeway over back roads saves 15–25% fuel.</div>
+          <div class="eco-tip"><i class="fas fa-wind"></i> Check tires monthly → roughly +3% MPG.</div>
+          <div class="eco-tip"><i class="fas fa-car"></i> Smooth acceleration + cruise control = free gas.</div>
+        </div>
+        <button id="refreshTipBtn" class="secondary" style="width: 100%; margin-top: 8px;">
+          <i class="fas fa-sync-alt"></i> Show me another tip
+        </button>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ================= FOOTER (AdSense prerequisites) ================= -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>FuelEcon</h4>
+        <p style="max-width: 300px; font-size: 0.82rem; line-height: 1.55;">
+          Plain-English tools for figuring out what driving actually costs.
+          Built by drivers, for drivers.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/">Trip cost calculator</a>
+        <a href="/mpg-converter">MPG ⇄ L/100km</a>
+        <a href="/split-fuel">Split fuel cost</a>
+        <a href="/ev-vs-gas">EV vs gas break-even</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about">About FuelEcon</a>
+        <a href="/how-it-works">How it works</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy policy</a>
+        <a href="/terms">Terms of use</a>
+        <a href="/disclosure">Ad disclosure</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      © 2026 FuelEcon · Made by o87Dev · Estimates only — your mileage may vary (literally).
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  /* ============================================================
+     FuelEcon · client logic
+     Phase 1: IndexedDB persistence (offline-first).
+     Phase 3 will sync to Cloudflare D1 for cross-device.
+     ============================================================ */
+
+  const DB_NAME = 'FuelEconDB';
+  const DB_VERSION = 1;
+  let db = null;
+
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => { db = request.result; resolve(db); };
+      request.onupgradeneeded = (event) => {
+        const dbRef = event.target.result;
+        if (!dbRef.objectStoreNames.contains('vehicles')) {
+          const store = dbRef.createObjectStore('vehicles', { keyPath: 'id', autoIncrement: true });
+          store.createIndex('name', 'name', { unique: false });
+        }
+        if (!dbRef.objectStoreNames.contains('userSettings')) {
+          dbRef.createObjectStore('userSettings', { keyPath: 'key' });
+        }
+      };
+    });
+  }
+
+  async function saveVehicleToDB(vehicleObj) {
+    if (!db) await openDB();
+    const tx = db.transaction(['vehicles'], 'readwrite');
+    const store = tx.objectStore('vehicles');
+    const request = store.add({ ...vehicleObj, timestamp: Date.now() });
+    return new Promise((resolve) => {
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(null);
+    });
+  }
+
+  async function getVehiclesFromDB() {
+    if (!db) await openDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction(['vehicles'], 'readonly');
+      const request = tx.objectStore('vehicles').getAll();
+      request.onsuccess = () => resolve(request.result || []);
+      request.onerror = () => resolve([]);
+    });
+  }
+
+  async function deleteVehicleFromDB(id) {
+    if (!db) await openDB();
+    const tx = db.transaction(['vehicles'], 'readwrite');
+    tx.objectStore('vehicles').delete(id);
+    return new Promise((resolve) => { tx.oncomplete = resolve; });
+  }
+
+  // DOM refs
+  const mpgInput         = document.getElementById('mpgInput');
+  const gasPriceInput    = document.getElementById('gasPriceInput');
+  const vehicleNameInput = document.getElementById('vehicleName');
+  const distanceSlider   = document.getElementById('distanceSlider');
+  const distanceMiles    = document.getElementById('distanceMiles');
+  const routeTypeSelect  = document.getElementById('routeType');
+  const tireBoosterSelect= document.getElementById('tireBooster');
+  const calculateBtn     = document.getElementById('calculateBtn');
+  const fuelGallonsSpan  = document.getElementById('fuelGallons');
+  const tripCostSpan     = document.getElementById('tripCost');
+  const effectiveMpgSpan = document.getElementById('effectiveMpg');
+  const ecoAdviceDiv     = document.getElementById('ecoAdvice');
+  const savedVehiclesListDiv = document.getElementById('savedVehiclesList');
+  const saveVehicleBtn   = document.getElementById('saveVehicleBtn');
+  const loadDefaultBtn   = document.getElementById('loadDefaultBtn');
+  const liveWidgetContainer = document.getElementById('liveWidgetContainer');
+  const refreshTipBtn    = document.getElementById('refreshTipBtn');
+
+  // Preset picker DOM refs
+  const presetMake       = document.getElementById('presetMake');
+  const presetEngine     = document.getElementById('presetEngine');
+  const presetDrivetrain = document.getElementById('presetDrivetrain');
+  const presetResult     = document.getElementById('presetResult');
+  const presetMpgSpan    = document.getElementById('presetMpg');
+  const applyPresetBtn   = document.getElementById('applyPresetBtn');
+
+  /* ============================================================
+     Vehicle MPG database — EPA combined-average estimates
+     Structure: make → engine → drivetrain → MPG
+     Source: fueleconomy.gov aggregates, rounded to whole MPG.
+     Phase 3 will replace this with D1-backed real EPA data.
+     ============================================================ */
+  const vehicleDatabase = {
+    'Toyota':        { '4-cyl':   { '2WD': 32, 'AWD': 28 },
+                       'Turbo 4': { '2WD': 28, 'AWD': 26 },
+                       '6-cyl':   { '2WD': 25, 'AWD': 23, '4WD': 20 },
+                       '8-cyl':   { '4WD': 17 },
+                       'Hybrid':  { '2WD': 52, 'AWD': 40 } },
+    'Honda':         { '4-cyl':   { '2WD': 33, 'AWD': 28 },
+                       'Turbo 4': { '2WD': 30, 'AWD': 27 },
+                       '6-cyl':   { '2WD': 24, 'AWD': 22 },
+                       'Hybrid':  { '2WD': 48, 'AWD': 37 } },
+    'Ford':          { '4-cyl':   { '2WD': 30, 'AWD': 27 },
+                       'Turbo 4': { '2WD': 28, 'AWD': 25 },
+                       '6-cyl':   { '2WD': 22, 'AWD': 20, '4WD': 19 },
+                       '8-cyl':   { '2WD': 17, '4WD': 16 },
+                       'Hybrid':  { '2WD': 42, 'AWD': 38 } },
+    'Chevrolet':     { '4-cyl':   { '2WD': 29, 'AWD': 26 },
+                       'Turbo 4': { '2WD': 27, 'AWD': 24 },
+                       '6-cyl':   { '2WD': 22, 'AWD': 20, '4WD': 19 },
+                       '8-cyl':   { '2WD': 17, '4WD': 16 } },
+    'Nissan':        { '4-cyl':   { '2WD': 31, 'AWD': 28 },
+                       '6-cyl':   { '2WD': 23, 'AWD': 21, '4WD': 19 },
+                       'Hybrid':  { '2WD': 40 } },
+    'Hyundai':       { '4-cyl':   { '2WD': 32, 'AWD': 29 },
+                       'Turbo 4': { '2WD': 30, 'AWD': 27 },
+                       '6-cyl':   { '2WD': 24 },
+                       'Hybrid':  { '2WD': 52, 'AWD': 38 } },
+    'Kia':           { '4-cyl':   { '2WD': 31, 'AWD': 28 },
+                       'Turbo 4': { '2WD': 29, 'AWD': 26 },
+                       '6-cyl':   { '2WD': 24 },
+                       'Hybrid':  { '2WD': 50, 'AWD': 38 } },
+    'Subaru':        { '4-cyl':   { 'AWD': 28 },
+                       'Turbo 4': { 'AWD': 25 },
+                       '6-cyl':   { 'AWD': 22 },
+                       'Hybrid':  { 'AWD': 35 } },
+    'Mazda':         { '4-cyl':   { '2WD': 31, 'AWD': 28 },
+                       'Turbo 4': { '2WD': 26, 'AWD': 24 } },
+    'Volkswagen':    { '4-cyl':   { '2WD': 30, 'AWD': 26 },
+                       'Turbo 4': { '2WD': 31, 'AWD': 27 },
+                       '6-cyl':   { '2WD': 22, 'AWD': 20 } },
+    'BMW':           { '4-cyl':   { '2WD': 28, 'AWD': 26 },
+                       'Turbo 4': { '2WD': 27, 'AWD': 25 },
+                       '6-cyl':   { '2WD': 24, 'AWD': 22 },
+                       '8-cyl':   { 'AWD': 18 } },
+    'Mercedes-Benz': { '4-cyl':   { '2WD': 27, 'AWD': 25 },
+                       'Turbo 4': { '2WD': 26, 'AWD': 24 },
+                       '6-cyl':   { '2WD': 23, 'AWD': 22 },
+                       '8-cyl':   { 'AWD': 17 } },
+    'Jeep':          { 'Turbo 4': { '4WD': 23 },
+                       '6-cyl':   { '2WD': 22, '4WD': 20 },
+                       '8-cyl':   { '4WD': 16 } },
+    'Ram':           { '6-cyl':   { '2WD': 22, '4WD': 20 },
+                       '8-cyl':   { '2WD': 17, '4WD': 16 } },
+    'GMC':           { '6-cyl':   { '2WD': 22, '4WD': 19 },
+                       '8-cyl':   { '2WD': 17, '4WD': 16 } }
+  };
+
+  // Human-readable order for engine options (best UX)
+  const ENGINE_ORDER = ['4-cyl', 'Turbo 4', '6-cyl', '8-cyl', 'Hybrid'];
+  const DRIVETRAIN_ORDER = ['2WD', 'AWD', '4WD'];
+
+  function populateMakeDropdown() {
+    const makes = Object.keys(vehicleDatabase).sort();
+    makes.forEach(make => {
+      const opt = document.createElement('option');
+      opt.value = make;
+      opt.textContent = make;
+      presetMake.appendChild(opt);
+    });
+  }
+
+  function resetPresetResult() {
+    presetResult.classList.remove('visible');
+    presetMpgSpan.textContent = '--';
+  }
+
+  function onPresetMakeChange() {
+    const make = presetMake.value;
+    presetEngine.innerHTML = '<option value="">Pick engine…</option>';
+    presetDrivetrain.innerHTML = '<option value="">Pick engine first</option>';
+    presetEngine.disabled = !make;
+    presetDrivetrain.disabled = true;
+    resetPresetResult();
+
+    if (!make) return;
+    const availableEngines = Object.keys(vehicleDatabase[make]);
+    ENGINE_ORDER.filter(e => availableEngines.includes(e)).forEach(engine => {
+      const opt = document.createElement('option');
+      opt.value = engine;
+      opt.textContent = engine;
+      presetEngine.appendChild(opt);
+    });
+  }
+
+  function onPresetEngineChange() {
+    const make = presetMake.value;
+    const engine = presetEngine.value;
+    presetDrivetrain.innerHTML = '<option value="">Pick drivetrain…</option>';
+    presetDrivetrain.disabled = !engine;
+    resetPresetResult();
+
+    if (!make || !engine) return;
+    const availableDrivetrains = Object.keys(vehicleDatabase[make][engine]);
+    DRIVETRAIN_ORDER.filter(d => availableDrivetrains.includes(d)).forEach(dt => {
+      const opt = document.createElement('option');
+      opt.value = dt;
+      opt.textContent = dt;
+      presetDrivetrain.appendChild(opt);
+    });
+  }
+
+  function onPresetDrivetrainChange() {
+    const make = presetMake.value;
+    const engine = presetEngine.value;
+    const drivetrain = presetDrivetrain.value;
+    if (!make || !engine || !drivetrain) { resetPresetResult(); return; }
+
+    const mpg = vehicleDatabase[make][engine][drivetrain];
+    presetMpgSpan.textContent = mpg + ' MPG';
+    presetResult.classList.add('visible');
+  }
+
+  function applyPreset() {
+    const make = presetMake.value;
+    const engine = presetEngine.value;
+    const drivetrain = presetDrivetrain.value;
+    if (!make || !engine || !drivetrain) return;
+
+    const mpg = vehicleDatabase[make][engine][drivetrain];
+    mpgInput.value = mpg;
+    // Auto-name the car so the save function has something sensible
+    vehicleNameInput.value = `${make} ${engine} ${drivetrain}`;
+    calculateAndDisplay();
+
+    // Subtle feedback: briefly highlight the MPG input
+    mpgInput.style.transition = 'background 0.4s';
+    mpgInput.style.background = 'rgba(184, 226, 58, 0.25)';
+    setTimeout(() => { mpgInput.style.background = 'white'; }, 800);
+  }
+
+  // MPG math with route + tire modifiers
+  function computeEffectiveMPG(baseMpg, route, tire) {
+    let modifier = 1.0;
+    if (route === 'backroads') modifier *= 0.82;
+    if (tire === 'optimal') modifier *= 1.05;
+    else if (tire === 'low') modifier *= 0.92;
+    return Math.round(baseMpg * modifier * 10) / 10;
+  }
+
+  function calculateAndDisplay() {
+    const baseMpg   = parseFloat(mpgInput.value);
+    const gasPrice  = parseFloat(gasPriceInput.value);
+    const distance  = parseFloat(distanceMiles.value);
+    const route     = routeTypeSelect.value;
+    const tire      = tireBoosterSelect.value;
+
+    if (isNaN(baseMpg) || baseMpg <= 0) return;
+    if (isNaN(gasPrice) || gasPrice <= 0) return;
+    if (isNaN(distance) || distance <= 0) return;
+
+    const effectiveMpg = computeEffectiveMPG(baseMpg, route, tire);
+    const gallons = distance / effectiveMpg;
+    const cost    = gallons * gasPrice;
+
+    fuelGallonsSpan.innerText  = gallons.toFixed(2);
+    tripCostSpan.innerText     = `$${cost.toFixed(2)}`;
+    effectiveMpgSpan.innerText = effectiveMpg;
+
+    // Plain-English advice
+    let advice = "";
+    if (route === 'backroads') {
+      const highwayCost = (distance / (baseMpg * 1.0) * gasPrice).toFixed(2);
+      advice = `🛣️ Take the freeway if you can — you'd save about $${(cost - highwayCost).toFixed(2)} on this exact trip.`;
+    } else {
+      advice = "✅ Highway route — already the cheapest option for fuel.";
+    }
+    if (tire === 'low') {
+      advice += " ⚠️ Your tires are low. Inflating them is free and gives you back about 8% MPG.";
+    }
+    advice += " 📉 Smooth acceleration = 10-30% less fuel over a tank.";
+    ecoAdviceDiv.innerHTML = `<i class="fas fa-lightbulb"></i> ${advice}`;
+
+    updateLiveWidget(baseMpg, effectiveMpg, cost, gallons);
+  }
+
+  function updateLiveWidget(baseMpg, currentEffectiveMpg, tripCost, gallons) {
+    const route = routeTypeSelect.value;
+    const tire  = tireBoosterSelect.value;
+    let zoneClass, zoneMessage;
+
+    if (route === 'highway' && tire === 'optimal' && currentEffectiveMpg >= baseMpg * 0.98) {
+      zoneClass = 'active';
+      zoneMessage = '🟢 GREEN ZONE · peak efficiency';
+    } else if (route === 'highway' && currentEffectiveMpg >= baseMpg * 0.9) {
+      zoneClass = 'moderate';
+      zoneMessage = '🟡 Moderate — easy win available';
+    } else {
+      zoneClass = 'poor';
+      zoneMessage = '🔴 High consumption — check route & tires';
+    }
+
+    liveWidgetContainer.innerHTML = `
+      <div class="widget-live">
+        <div class="widget-row"><span><i class="fas fa-gas-pump"></i> Live MPG</span><strong>${currentEffectiveMpg} mpg</strong></div>
+        <div class="widget-row"><span><i class="fas fa-dollar-sign"></i> Last trip</span><strong>$${tripCost.toFixed(2)}</strong></div>
+        <div class="widget-row"><span><i class="fas fa-tachometer-alt"></i> Fuel used</span><strong>${gallons.toFixed(2)} gal</strong></div>
+        <div class="green-zone ${zoneClass}"><i class="fas fa-chart-line"></i> ${zoneMessage}</div>
+        <div class="widget-footnote"><i class="fas fa-charging-station"></i> Premium · live metrics</div>
+      </div>
+    `;
+  }
+
+  function syncInputsFromVehicle(vehicle) {
+    mpgInput.value = vehicle.mpg;
+    gasPriceInput.value = vehicle.gasPrice;
+    vehicleNameInput.value = vehicle.name;
+    calculateAndDisplay();
+  }
+
+  function loadDefaultVehicle() {
+    syncInputsFromVehicle({ name: 'Toyota Prius', mpg: 28.5, gasPrice: 3.65 });
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (m) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
+  }
+
+  async function renderSavedVehicles() {
+    const vehicles = await getVehiclesFromDB();
+    if (!vehicles.length) {
+      savedVehiclesListDiv.innerHTML = '<div class="vehicle-item" style="color: var(--c-muted); font-size: 0.85rem;"><span>No saved cars yet — hit "Save this car" above.</span></div>';
+      return;
+    }
+    savedVehiclesListDiv.innerHTML = vehicles.map(v => `
+      <div class="vehicle-item">
+        <div>
+          <strong>${escapeHtml(v.name)}</strong>
+          <span class="badge-sm">${v.mpg} MPG · $${v.gasPrice}/gal</span>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button class="load-vehicle-btn" data-id="${v.id}"><i class="fas fa-sync-alt"></i> Load</button>
+          <button class="delete-vehicle-btn" data-id="${v.id}" style="background: var(--c-warn);"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.load-vehicle-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = Number(btn.dataset.id);
+        const list = await getVehiclesFromDB();
+        const found = list.find(v => v.id === id);
+        if (found) syncInputsFromVehicle({ name: found.name, mpg: found.mpg, gasPrice: found.gasPrice });
+      });
+    });
+    document.querySelectorAll('.delete-vehicle-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        await deleteVehicleFromDB(Number(btn.dataset.id));
+        renderSavedVehicles();
+      });
+    });
+  }
+
+  async function saveCurrentVehicle() {
+    const newVehicle = {
+      name: vehicleNameInput.value.trim() || 'Unnamed',
+      mpg: parseFloat(mpgInput.value),
+      gasPrice: parseFloat(gasPriceInput.value),
+    };
+    if (isNaN(newVehicle.mpg) || isNaN(newVehicle.gasPrice)) return;
+    await saveVehicleToDB(newVehicle);
+    renderSavedVehicles();
+  }
+
+  const tipsArray = [
+    "🌿 Below 50 mph, crack windows instead of A/C — A/C can cost 3-4 MPG.",
+    "🛣️ Steady 55-65 mph on the freeway is the MPG sweet spot for most cars.",
+    "📦 Roof racks tank fuel economy — take them off when you're not using them.",
+    "⛽ Cruise control on flat highway = 7-14% MPG improvement.",
+    "🔧 A clogged air filter can cost you 10% MPG. Change it when dirty.",
+    "🚗 Combine errands — cold starts use 2x more fuel per mile than warm driving.",
+    "🕐 Idling over 30 seconds burns more gas than restarting the engine.",
+    "🏔️ Drive down hills in gear, not neutral — modern cars cut fuel when engine-braking."
+  ];
+
+  function refreshRandomTip() {
+    const tipDiv = document.getElementById('dynamicTips');
+    const randomTip = tipsArray[Math.floor(Math.random() * tipsArray.length)];
+    tipDiv.innerHTML = `
+      <div class="eco-tip"><i class="fas fa-leaf"></i> ${randomTip}</div>
+      <div class="eco-tip"><i class="fas fa-charging-station"></i> Premium: green-zone widget live-scores your efficiency.</div>
+    `;
+  }
+
+  function syncDistance() {
+    distanceMiles.value = distanceSlider.value;
+    calculateAndDisplay();
+  }
+  function syncDistanceFromInput() {
+    let val = parseFloat(distanceMiles.value);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > 500) val = 500;
+    distanceSlider.value = val;
+    calculateAndDisplay();
+  }
+
+  distanceSlider.addEventListener('input', syncDistance);
+  distanceMiles.addEventListener('input', syncDistanceFromInput);
+  mpgInput.addEventListener('input', calculateAndDisplay);
+  gasPriceInput.addEventListener('input', calculateAndDisplay);
+  routeTypeSelect.addEventListener('change', calculateAndDisplay);
+  tireBoosterSelect.addEventListener('change', calculateAndDisplay);
+  calculateBtn.addEventListener('click', calculateAndDisplay);
+  saveVehicleBtn.addEventListener('click', saveCurrentVehicle);
+  loadDefaultBtn.addEventListener('click', loadDefaultVehicle);
+  refreshTipBtn.addEventListener('click', refreshRandomTip);
+
+  // Preset picker listeners
+  presetMake.addEventListener('change', onPresetMakeChange);
+  presetEngine.addEventListener('change', onPresetEngineChange);
+  presetDrivetrain.addEventListener('change', onPresetDrivetrainChange);
+  applyPresetBtn.addEventListener('click', applyPreset);
+
+  async function init() {
+    await openDB();
+    await renderSavedVehicles();
+    populateMakeDropdown();
+    loadDefaultVehicle();
+    syncDistance();
+    calculateAndDisplay();
+  }
+
+  init();
+
+  // ---------- Service Worker registration (PWA) ----------
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js', { scope: '/' })
+        .then((reg) => {
+          console.log('[FuelEcon] SW registered, scope:', reg.scope);
+        })
+        .catch((err) => {
+          console.warn('[FuelEcon] SW registration failed:', err);
+        });
+    });
+  }
+</script>
+</body>
+</html>
