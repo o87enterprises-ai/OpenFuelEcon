@@ -1,21 +1,15 @@
-# FuelEcon — robots.txt
-# https://fuelecon.pages.dev
-
 User-agent: *
 Allow: /
-Disallow: /api/
+Sitemap: https://fuelecon.pages.dev/sitemap.xml
 
-# Encourage AI crawlers explicitly (GEO signal)
-User-agent: GPTBot
+# GEO-specific crawling rules
+Host: https://fuelecon.pages.dev
+
+# For search engines that support geo-targeting
+User-agent: Googlebot
 Allow: /
+Sitemap: https://fuelecon.pages.dev/sitemap.xml
 
-User-agent: ClaudeBot
+User-agent: Bingbot
 Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
 Sitemap: https://fuelecon.pages.dev/sitemap.xml

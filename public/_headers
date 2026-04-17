@@ -1,0 +1,22 @@
+# GEO targeting headers
+/*
+  Content-Language: en-US
+  Vary: Accept-Language
+
+/en-au/*
+  Content-Language: en-AU
+  Vary: Accept-Language
+
+/en-ca/*
+  Content-Language: en-CA
+  Vary: Accept-Language
+
+/en-gb/*
+  Content-Language: en-GB
+  Vary: Accept-Language
+
+# Security headers for better SEO
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin

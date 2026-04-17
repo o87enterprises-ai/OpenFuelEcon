@@ -1,44 +1,15 @@
 {
   "_meta": {
     "locale": "en-gb",
-    "locale_display": "English (UK)",
-    "hreflang": "en-gb",
-    "language": "English",
-    "country": "United Kingdom",
-    "direction": "ltr",
-    "currency_code": "GBP",
-    "currency_symbol": "£",
-    "currency_position": "prefix",
-    "distance_unit": "miles",
-    "distance_unit_short": "mi",
-    "volume_unit": "litres",
-    "volume_unit_short": "L",
-    "economy_unit": "MPG",
-    "economy_unit_label": "miles per gallon",
-    "decimal_separator": ".",
-    "thousands_separator": ",",
-    "gas_price_default": 1.45,
-    "gas_price_label": "Petrol price",
-    "gas_term": "petrol",
-    "tire_term": "tyre",
-    "highway_term": "motorway"
+    "locale_display": "🇬🇧 English (UK)",
+    "gas_price_default": 1.45
   },
   "home": {
-    "meta_title": "FuelEcon — Petrol Cost Calculator UK | Plain-English Fuel Economy Tool",
-    "meta_description": "Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, journey cost, and the easy tweaks that save petrol — no mpg degree required.",
-    "vehicle_card_blurb": "Don't know your MPG? Pick your car from the dropdowns — we'll fill it in.",
-    "ev_notice_html": "⚡ Driving an EV? Petrol calc doesn't apply — <a href=\"/en-gb/ev-vs-gas/\">use our EV cost tool</a>.",
-    "label_fuel_economy": "Fuel economy (MPG)",
+    "meta_title": "Fuel Economy Calculator - Save on Petrol | FuelEcon UK",
+    "meta_description": "Calculate fuel costs in pounds, compare vehicle efficiency, and find fuel-saving tips for UK drivers.",
+    "label_fuel_economy": "Fuel economy (MPG Imp)",
     "label_gas_price": "Petrol price (£ / L)",
-    "placeholder_nickname": "e.g. Ford Fiesta 2022",
-    "trip_card_blurb": "Slide to set the distance, pick your route, and we'll show what the journey actually costs.",
-    "route_highway": "🛣️ Motorway (best MPG)",
-    "route_backroads": "🌲 A-roads / urban (lower MPG)",
-    "label_tires": "Tyre pressure",
-    "btn_calculate": "Work out this journey",
-    "result_trip_cost": "💰 Journey cost"
-  },
-  "footer": {
-    "blurb": "Plain-English tools for working out what driving actually costs. Built by drivers, for drivers."
+    "label_distance": "📏 Distance (miles)",
+    "ev_notice_html": "⚡ Electric vehicle? <a href='/ev-vs-gas/'>Compare EV vs Petrol savings</a>"
   }
 }
