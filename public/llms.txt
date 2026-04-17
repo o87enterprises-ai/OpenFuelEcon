@@ -1,0 +1,48 @@
+# FuelEcon
+
+> Plain-English fuel economy and trip cost calculators. No mpg maths degree required.
+
+FuelEcon is a free web application that helps drivers estimate the real cost of driving. It uses EPA fuel economy data and public gas price feeds (EIA for the US, EU Weekly Oil Bulletin for Europe) to produce honest estimates.
+
+## Core tools
+
+- [Trip cost calculator](https://fuelecon.pages.dev/): Enter miles, MPG, and gas price to compute fuel needed and total trip cost. Includes route type (highway vs back roads) and tire pressure modifiers.
+- [MPG ⇄ L/100km converter](https://fuelecon.pages.dev/mpg-converter/): Convert between the two most common fuel-economy units.
+- [Split fuel cost](https://fuelecon.pages.dev/split-fuel/): Divide trip gas cost between riders or roommates.
+- [EV vs gas break-even](https://fuelecon.pages.dev/ev-vs-gas/): Determine when switching to an EV pays back versus staying with gasoline.
+
+## Regional variants
+
+- [en-GB (UK)](https://fuelecon.pages.dev/en-gb/): Petrol pricing in GBP, motorway terminology.
+- [en-CA (Canada)](https://fuelecon.pages.dev/en-ca/): L/100km economy, CAD pricing, Canadian data sources.
+- [en-AU (Australia)](https://fuelecon.pages.dev/en-au/): AUD pricing, Australian fuel context.
+
+## Data sources
+
+- Vehicle fuel economy averages: U.S. EPA fueleconomy.gov
+- US gas prices: U.S. Energy Information Administration (EIA) weekly retail series
+- Route calculation: OpenStreetMap via OSRM routing engine
+- Geocoding: Nominatim (OpenStreetMap Foundation)
+
+## How the calculator works
+
+Trip cost = (distance ÷ effective MPG) × gas price per gallon.
+
+Effective MPG is adjusted from the base MPG based on:
+- Route type: backroads reduce MPG by ~18% vs highway
+- Tire pressure: optimal adds ~5% MPG, under-inflated subtracts ~8%
+
+Real-world fuel use will vary based on driving style, weather, traffic, elevation, and vehicle condition. FuelEcon produces estimates, not guarantees.
+
+## About
+
+FuelEcon is an independent publication of o87 Enterprises / TruegleAi. It is not affiliated with any vehicle manufacturer, fuel retailer, or automotive association.
+
+Contact: hello@trumpafi.online
+Privacy: https://fuelecon.pages.dev/privacy/
+Terms: https://fuelecon.pages.dev/terms/
+
+## Optional
+
+- [About](https://fuelecon.pages.dev/about/): Who's behind FuelEcon and where our data comes from.
+- [Contact](https://fuelecon.pages.dev/contact/): Feedback, corrections, press, and privacy requests.

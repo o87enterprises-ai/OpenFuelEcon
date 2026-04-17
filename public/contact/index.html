@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A5F3F">
+  <title>Contact · FuelEcon</title>
+  <meta name="description" content="Feedback, corrections, press, or partnerships — we read everything.">
+  <link rel="canonical" href="https://fuelecon.pages.dev/contact/">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FuelEcon">
+  <meta property="og:title" content="Contact · FuelEcon">
+  <meta property="og:description" content="Feedback, corrections, press, or partnerships — we read everything.">
+  <meta property="og:url" content="https://fuelecon.pages.dev/contact/">
+
+  <!-- Icons + fonts -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/static.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <a href="/" class="brand-link">
+      <h1 class="brand"><i class="fas fa-leaf"></i> FuelEcon</h1>
+      <span class="tagline">Fuel economy for dummies</span>
+    </a>
+    <nav class="site-nav">
+      <a href="/">Calculator</a>
+      <a href="/about/">About</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/terms/">Terms</a>
+      <a href="/disclosure/">Disclosure</a>
+      <a href="/contact/" class="active">Contact</a>
+    </nav>
+  </header>
+
+  
+  <section class="page-hero">
+    <h1>Contact FuelEcon</h1>
+    <p class="lead">Feedback, corrections, press, or partnerships — we read everything.</p>
+    <div class="meta">
+      <span><strong>Publisher:</strong> o87 Enterprises / TruegleAi</span>
+      <span><strong>Response time:</strong> usually within 2 business days</span>
+    </div>
+  </section>
+
+  <article class="prose">
+
+    <h2>Email</h2>
+    <p>For most inquiries, email is the fastest way to reach us:</p>
+    <p><a href="mailto:hello@trumpafi.online"><strong>hello@trumpafi.online</strong></a></p>
+
+    <h3>What to include</h3>
+    <ul>
+      <li><strong>Bug reports:</strong> the tool you were using, what you expected, what happened, and your browser / device if relevant.</li>
+      <li><strong>Corrections:</strong> the page URL and what you believe should be changed, with a source if possible.</li>
+      <li><strong>Feature requests:</strong> the problem you're trying to solve (not just the feature idea).</li>
+      <li><strong>Press / partnerships:</strong> who you are, what you're proposing, and a deadline if you have one.</li>
+    </ul>
+
+    <h2>Quick message form</h2>
+    <div class="contact-form">
+      <form id="contactForm" onsubmit="return handleContactSubmit(event)">
+        <div class="form-row">
+          <label for="cf-name">Your name</label>
+          <input type="text" id="cf-name" name="name" required autocomplete="name">
+        </div>
+        <div class="form-row">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="cf-topic">Topic</label>
+          <select id="cf-topic" name="topic" required>
+            <option value="">Pick one…</option>
+            <option value="bug">Bug report</option>
+            <option value="correction">Correction</option>
+            <option value="feature">Feature request</option>
+            <option value="press">Press / partnerships</option>
+            <option value="privacy">Privacy / data request</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required placeholder="Tell us what's on your mind…"></textarea>
+        </div>
+        <div class="form-row">
+          <button type="submit"><i class="fas fa-paper-plane"></i> Send message</button>
+        </div>
+      </form>
+      <p id="cf-status" style="font-size: 0.9rem; color: var(--c-muted); margin-top: 12px;"></p>
+    </div>
+
+    <h2>Privacy &amp; data requests</h2>
+    <p>If you are submitting a GDPR, CCPA, or CPRA-related request (access, correction, deletion, opt-out), please select "Privacy / data request" as the topic or email us directly at <a href="mailto:privacy@trumpafi.online">privacy@trumpafi.online</a> with "Privacy request" in the subject line.</p>
+
+    <h2>Press</h2>
+    <p>For press and media inquiries, please include your publication, deadline, and any specific data or quotes you need. Our brand assets (logo, screenshots, short bio) are available on request. Press contacts can write directly to <a href="mailto:press@trumpafi.online">press@trumpafi.online</a>.</p>
+
+    <h2>Publisher</h2>
+    <p><strong>o87 Enterprises / TruegleAi</strong><br>
+    <em>FuelEcon is an independent publication of o87 Enterprises / TruegleAi.</em></p>
+
+    <div class="callout info">
+      <strong>Not a help desk:</strong> If you're asking "what's the best MPG for my commute?" — you probably want the <a href="/">trip calculator</a> itself. We're happy to answer product questions, but we can't give personalized driving or vehicle-purchase advice.
+    </div>
+
+  </article>
+
+  <script>
+    /* Contact form: opens the user's mail client with a pre-filled draft.
+       Phase 3 will replace this with a Pages Function that forwards to our inbox. */
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const topic   = document.getElementById('cf-topic').value;
+      const message = document.getElementById('cf-message').value.trim();
+      const status  = document.getElementById('cf-status');
+
+      if (!name || !email || !topic || !message) {
+        status.textContent = 'Please fill in all fields.';
+        status.style.color = 'var(--c-warn)';
+        return false;
+      }
+
+      const subject = encodeURIComponent(`[FuelEcon · ${topic}] from ${name}`);
+      const body    = encodeURIComponent(`${message}\n\n—\nFrom: ${name} <${email}>`);
+      window.location.href = `mailto:hello@trumpafi.online?subject=${subject}&body=${body}`;
+
+      status.textContent = 'Opening your email client… if nothing happens, please email hello@trumpafi.online directly.';
+      status.style.color = 'var(--c-primary)';
+      return false;
+    }
+  </script>
+
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>FuelEcon</h4>
+        <p style="max-width: 300px; font-size: 0.82rem; line-height: 1.55;">
+          Plain-English tools for figuring out what driving actually costs.
+          Built by drivers, for drivers.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/">Trip cost calculator</a>
+        <a href="/mpg-converter/">MPG ⇄ L/100km</a>
+        <a href="/split-fuel/">Split fuel cost</a>
+        <a href="/ev-vs-gas/">EV vs gas break-even</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about/">About FuelEcon</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of use</a>
+        <a href="/disclosure/">Ad disclosure</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      © 2026 FuelEcon · Published by o87 Enterprises / TruegleAi · Estimates only — your mileage may vary (literally).
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

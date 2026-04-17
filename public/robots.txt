@@ -1,0 +1,21 @@
+# FuelEcon — robots.txt
+# https://fuelecon.pages.dev
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Encourage AI crawlers explicitly (GEO signal)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://fuelecon.pages.dev/sitemap.xml

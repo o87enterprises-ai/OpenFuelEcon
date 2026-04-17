@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "locale": "en-ca",
+    "locale_display": "English (Canada)",
+    "hreflang": "en-ca",
+    "language": "English",
+    "country": "Canada",
+    "direction": "ltr",
+    "currency_code": "CAD",
+    "currency_symbol": "C$",
+    "currency_position": "prefix",
+    "distance_unit": "kilometres",
+    "distance_unit_short": "km",
+    "volume_unit": "litres",
+    "volume_unit_short": "L",
+    "economy_unit": "L/100km",
+    "economy_unit_label": "litres per 100 kilometres",
+    "decimal_separator": ".",
+    "thousands_separator": ",",
+    "gas_price_default": 1.58,
+    "gas_price_label": "Gas price",
+    "gas_term": "gasoline",
+    "tire_term": "tire",
+    "highway_term": "highway"
+  },
+  "home": {
+    "meta_title": "FuelEcon — Gas Cost Calculator Canada | Plain-English Fuel Economy Tool",
+    "meta_description": "Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, trip cost, and the easy tweaks that save gas — in L/100km or MPG, your choice.",
+    "vehicle_card_blurb": "Don't know your fuel economy? Pick your car from the dropdowns — we'll fill it in.",
+    "ev_notice_html": "⚡ Driving an EV? Gas calc doesn't apply — <a href=\"/en-ca/ev-vs-gas/\">use our EV cost tool</a>.",
+    "label_fuel_economy": "Fuel economy (L/100km)",
+    "label_gas_price": "Gas price (C$ / L)",
+    "placeholder_nickname": "e.g. Honda Civic 2022",
+    "label_distance": "📏 Distance (km)",
+    "route_backroads": "🌲 Back roads / city (lower economy)"
+  }
+}

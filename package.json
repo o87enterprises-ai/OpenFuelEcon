@@ -9,6 +9,10 @@
     "deploy": "wrangler pages deploy public --project-name=fuelecon",
     "deploy:preview": "wrangler pages deploy public --project-name=fuelecon --branch=preview",
     "tail": "wrangler pages deployment tail --project-name=fuelecon",
+    "build:legal": "python3 scripts/build_legal_pages.py",
+    "build:i18n": "python3 scripts/build_i18n.py",
+    "build:sitemap": "python3 scripts/build_sitemap.py",
+    "build:all": "npm run build:legal && npm run build:i18n && npm run build:sitemap",
     "lint:html": "echo 'Phase 3 will add html-validate here'",
     "icons:regenerate": "python3 scripts/generate-icons.py"
   },

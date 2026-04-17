@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-au">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#1A5F3F">
 
   <!-- ================= SEO FOUNDATION ================= -->
-  <title>FuelEcon — Fuel Economy for Dummies | Plain-English Gas Cost Calculator</title>
-  <meta name="description" content="Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, trip cost, and the easy tweaks that save gas — no mpg maths degree required.">
+  <title>FuelEcon — Petrol Cost Calculator Australia | Plain-English Fuel Economy</title>
+  <meta name="description" content="Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, trip cost, and the easy tweaks that save petrol — for Aussie drivers.">
   <meta name="keywords" content="fuel economy calculator, gas cost calculator, mpg calculator, trip fuel cost, fuel economy for dummies, road trip gas calculator">
   <link rel="canonical" href="https://fuelecon.pages.dev/">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -15,15 +15,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="FuelEcon">
-  <meta property="og:title" content="FuelEcon — Fuel Economy for Dummies">
-  <meta property="og:description" content="The plain-English gas cost calculator. Type your car, your trip, get your real cost and the tweaks that save fuel.">
+  <meta property="og:title" content="FuelEcon — Petrol Cost Calculator Australia | Plain-English Fuel Economy">
+  <meta property="og:description" content="Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, trip cost, and the easy tweaks that save petrol — for Aussie drivers.">
   <meta property="og:url" content="https://fuelecon.pages.dev/">
   <meta property="og:image" content="https://fuelecon.pages.dev/og-image.png">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FuelEcon — Fuel Economy for Dummies">
-  <meta name="twitter:description" content="Plain-English gas cost calculator. No mpg maths degree required.">
+  <meta name="twitter:title" content="FuelEcon — Petrol Cost Calculator Australia | Plain-English Fuel Economy">
+  <meta name="twitter:description" content="Work out the real cost of any drive in plain English. FuelEcon shows your fuel use, trip cost, and the easy tweaks that save petrol — for Aussie drivers.">
   <meta name="twitter:image" content="https://fuelecon.pages.dev/og-image.png">
 
   <!-- PWA (manifest + service worker wired in Batch 2) -->
@@ -477,8 +477,8 @@
     <div class="lang-switcher" aria-label="Language and region">
     <label for="langSelect" style="display:none;">Language</label>
     <select id="langSelect" onchange="window.location.href=this.value" aria-label="Switch language">
-      <option value="/" selected>English (US)</option>
-      <option value="/en-au/">English (Australia)</option>
+      <option value="/">English (US)</option>
+      <option value="/en-au/" selected>English (Australia)</option>
       <option value="/en-ca/">English (Canada)</option>
       <option value="/en-gb/">English (UK)</option>
     </select>
@@ -496,7 +496,7 @@
       <!-- Vehicle -->
       <section class="card" aria-labelledby="vehicle-heading">
         <h2 id="vehicle-heading" class="card-title"><i class="fas fa-car"></i> What are you driving?</h2>
-        <p class="card-blurb">Don't know your MPG? Pick your car from the dropdowns — we'll fill it in.</p>
+        <p class="card-blurb">Don't know your fuel economy? Pick your ute or car from the dropdowns — we'll fill it in.</p>
 
         <!-- Preset picker (for Dummies path) -->
         <div class="preset-picker">
@@ -530,20 +530,19 @@
             <button id="applyPresetBtn" class="amber"><i class="fas fa-check"></i> Use this MPG</button>
           </div>
           <div class="ev-notice">
-            ⚡ Driving an EV? Gas calc doesn't apply — <a href="/ev-vs-gas">use our EV cost tool</a>.
-          </div>
+            ⚡ Driving an EV? Petrol calc doesn't apply — <a href="/en-au/ev-vs-gas/">use our EV cost tool</a>.</div>
         </div>
 
         <div class="or-divider">or enter your own</div>
 
         <div class="row-2">
           <div class="input-group">
-            <label for="mpgInput"><i class="fas fa-tachometer-alt"></i> Fuel economy (MPG)</label>
+            <label for="mpgInput"><i class="fas fa-tachometer-alt"></i> Fuel economy (L/100km)</label>
             <input type="number" id="mpgInput" step="0.5" value="28.5" min="1" max="200">
           </div>
           <div class="input-group">
-            <label for="gasPriceInput"><i class="fas fa-gas-pump"></i> Gas price ($ / gal)</label>
-            <input type="number" id="gasPriceInput" step="0.05" value="3.65" min="0.1">
+            <label for="gasPriceInput"><i class="fas fa-gas-pump"></i> Petrol price (A$ / L)</label>
+            <input type="number" id="gasPriceInput" step="0.05" value="1.92" min="0.1">
           </div>
         </div>
 
@@ -577,7 +576,7 @@
         </div>
 
         <div class="input-group">
-          <label for="distanceSlider">📏 Distance (miles)</label>
+          <label for="distanceSlider">📏 Distance (km)</label>
           <input type="range" id="distanceSlider" min="1" max="500" value="124" step="1">
           <input type="number" id="distanceMiles" value="124" step="1" min="1" style="margin-top: 8px;">
         </div>
@@ -586,12 +585,12 @@
           <div class="input-group">
             <label for="routeType"><i class="fas fa-route"></i> Route type</label>
             <select id="routeType">
-              <option value="highway">🛣️ Freeway / Highway (best MPG)</option>
-              <option value="backroads">🌲 Back roads / City (lower MPG)</option>
+              <option value="highway">🛣️ Highway / motorway (best economy)</option>
+              <option value="backroads">🌲 Back roads / urban (lower economy)</option>
             </select>
           </div>
           <div class="input-group">
-            <label for="tireBooster"><i class="fas fa-wind"></i> Tire pressure</label>
+            <label for="tireBooster"><i class="fas fa-wind"></i> Tyre pressure</label>
             <select id="tireBooster">
               <option value="optimal">✅ Optimal (+5% economy)</option>
               <option value="low">⚠️ Under-inflated (-8% economy)</option>
@@ -649,16 +648,15 @@
       <div class="footer-col">
         <h4>FuelEcon</h4>
         <p style="max-width: 300px; font-size: 0.82rem; line-height: 1.55;">
-          Plain-English tools for figuring out what driving actually costs.
-          Built by drivers, for drivers.
+          Plain-English tools for working out what driving actually costs. Built by drivers, for drivers.
         </p>
       </div>
       <div class="footer-col">
         <h4>Tools</h4>
         <a href="/">Trip cost calculator</a>
-        <a href="/mpg-converter/">MPG ⇄ L/100km</a>
-        <a href="/split-fuel/">Split fuel cost</a>
-        <a href="/ev-vs-gas/">EV vs gas break-even</a>
+        <a href="/en-au/mpg-converter/">MPG ⇄ L/100km</a>
+        <a href="/en-au/split-fuel/">Split fuel cost</a>
+        <a href="/en-au/ev-vs-gas/">EV vs gas break-even</a>
       </div>
       <div class="footer-col">
         <h4>About</h4>
@@ -988,7 +986,7 @@
   }
 
   function loadDefaultVehicle() {
-    syncInputsFromVehicle({ name: 'Toyota Prius', mpg: 28.5, gasPrice: 3.65 });
+    syncInputsFromVehicle({ name: 'Toyota Prius', mpg: 28.5, gasPrice: 1.92 });
   }
 
   function escapeHtml(str) {
