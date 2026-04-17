@@ -58,11 +58,18 @@ def load_locales() -> dict:
 
     locales = {DEFAULT_LOCALE: master}
     for p in sorted(I18N_DIR.glob("*.json")):
+        # Skip macOS resource fork files and other hidden files
+        if p.name.startswith("._") or p.name.startswith(".DS_Store"):
+            continue
         slug = p.stem
         if slug == DEFAULT_LOCALE:
             continue
-        delta = json.loads(p.read_text(encoding="utf-8"))
-        locales[slug] = deep_merge(master, delta)
+        try:
+            delta = json.loads(p.read_text(encoding="utf-8"))
+            locales[slug] = deep_merge(master, delta)
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            print(f"⚠️  Warning: Skipping {p.name} - {e}")
+            continue
     return locales
 
 
