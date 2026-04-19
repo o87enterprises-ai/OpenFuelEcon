@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A5F3F">
+  <title>Lease vs Buy Fuel Factor Calculator · FuelEcon</title>
+  <meta name="description" content="Calculate how much fuel costs influence the decision to lease a new efficient car vs buying or keeping an older one.">
+  <link rel="canonical" href="https://fuelecon.pages.dev/lease-vs-buy-fuel/">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FuelEcon">
+  <meta property="og:title" content="Lease vs Buy Fuel Factor Calculator · FuelEcon">
+  <meta property="og:description" content="Calculate how much fuel costs influence the decision to lease a new efficient car vs buying or keeping an older one.">
+  <meta property="og:url" content="https://fuelecon.pages.dev/lease-vs-buy-fuel/">
+
+  <!-- Icons + fonts -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/static.css">
+
+  <style>
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .option-card {
+      background: var(--c-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+    .option-card.highlight {
+      border-color: var(--c-primary);
+      background: #F4FBF7;
+    }
+    .option-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: var(--c-primary-dk);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .input-row {
+      margin-bottom: 12px;
+    }
+    .input-row label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--c-ink-soft);
+      margin-bottom: 4px;
+    }
+    .input-row input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--c-border);
+    }
+    .summary-card {
+      background: var(--c-ink);
+      color: white;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .summary-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    .summary-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--c-accent);
+      display: block;
+      margin: 12px 0;
+    }
+    .summary-note {
+      font-size: 0.9rem;
+      color: #c8d0d8;
+    }
+    @media (max-width: 600px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- WebApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "FuelEcon Lease vs Buy Fuel Factor Calculator",
+    "description": "Calculate the fuel cost difference between leasing a new car and buying/keeping an old one.",
+    "url": "https://fuelecon.pages.dev/lease-vs-buy-fuel/",
+    "applicationCategory": "UtilitiesApplication"
+  }
+  </script>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <a href="/" class="brand-link">
+      <h1 class="brand"><i class="fas fa-leaf"></i> FuelEcon</h1>
+      <span class="tagline">Fuel economy for dummies</span>
+    </a>
+    <nav class="site-nav">
+      <a href="/">Calculator</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <h1>Lease vs Buy Fuel Factor</h1>
+    <p class="lead">Is that low lease payment still a good deal after you factor in the gas savings of a newer car?</p>
+  </section>
+
+  <article class="prose">
+    <div class="summary-card">
+      <h2 id="summaryTitle">Monthly Fuel Savings</h2>
+      <span id="savingsValue" class="summary-val">$0.00</span>
+      <p id="summaryNote" class="summary-note">By switching to the lease option, you'd save this much on gas alone.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- Option A: Current/Buy -->
+      <div class="option-card">
+        <h3><i class="fas fa-history"></i> Keeping / Buying</h3>
+        <div class="input-row">
+          <label for="oldMpg">Vehicle MPG</label>
+          <input type="number" id="oldMpg" value="20" step="0.5">
+        </div>
+        <div class="input-row">
+          <label for="oldPayment">Monthly Payment ($)</label>
+          <input type="number" id="oldPayment" value="0" step="10">
+        </div>
+        <div class="input-row">
+          <label for="gasPrice">Gas Price ($/gal)</label>
+          <input type="number" id="gasPrice" value="3.65" step="0.01">
+        </div>
+      </div>
+
+      <!-- Option B: New Lease -->
+      <div class="option-card highlight">
+        <h3><i class="fas fa-file-contract"></i> Leasing New</h3>
+        <div class="input-row">
+          <label for="newMpg">Lease Vehicle MPG</label>
+          <input type="number" id="newMpg" value="35" step="0.5">
+        </div>
+        <div class="input-row">
+          <label for="newPayment">Lease Payment ($)</label>
+          <input type="number" id="newPayment" value="399" step="10">
+        </div>
+        <div class="input-row">
+          <label for="milesPerMonth">Miles Per Month</label>
+          <input type="number" id="milesPerMonth" value="1000" step="100">
+        </div>
+      </div>
+    </div>
+
+    <h2>How it works</h2>
+    <p>When you're deciding between keeping your current car (which might be paid off but gas-thirsty) and leasing a brand new model, the sticker price doesn't tell the whole story. A lease payment might look high, but if the new car gets 15 more MPG than your current one, your "effective" cost is much lower.</p>
+    <p>This tool calculates the monthly fuel cost for both vehicles based on your driving habits. We then subtract the fuel savings from the lease payment to show you the "Net Monthly Change" in your wallet.</p>
+
+    <h2>Why it matters</h2>
+    <p>According to the <strong>EPA</strong>, the average vehicle on the road today gets about 24 MPG. Many new leases feature hybrid or highly efficient engines that can easily hit 40-50 MPG. For a driver doing 1,000 miles a month, that jump in efficiency can save over $100 in gas. That means a $400 lease payment might actually feel like a $300 payment compared to your old car's budget.</p>
+
+    <div class="callout info">
+      <strong>Pro Tip:</strong> Don't forget insurance! Newer cars often cost more to insure than older ones. While you're saving on gas, check a quick quote to make sure the insurance bump doesn't eat all your fuel savings.
+    </div>
+
+    <h2>FAQs</h2>
+    <div class="faq-item">
+      <button class="faq-question">Does leasing always save money on gas? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-answer">
+        <p>Only if the new car is significantly more efficient than your current one. If you're leasing a similar SUV to what you already own, the fuel factor might be negligible.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What is a good "Fuel Factor" for a lease? <i class="fas fa-chevron-down"></i></button>
+      <div class="faq-answer">
+        <p>If your gas savings cover more than 25% of your lease payment, the "Fuel Factor" is considered very high and a strong reason to consider the upgrade.</p>
+      </div>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>FuelEcon</h4>
+        <p style="max-width: 300px; font-size: 0.82rem; line-height: 1.55;">
+          Plain-English tools for figuring out what driving actually costs.
+          Built by drivers, for drivers.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/">Trip cost calculator</a>
+        <a href="/mpg-converter/">MPG ⇄ L/100km</a>
+        <a href="/split-fuel/">Split fuel cost</a>
+        <a href="/ev-vs-gas/">EV vs gas break-even</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about/">About FuelEcon</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of use</a>
+        <a href="/disclosure/">Ad disclosure</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      © 2026 FuelEcon · Published by o87 Enterprises / TruegleAi · Estimates only — your mileage may vary (literally).
+    </div>
+  </footer>
+
+</div>
+
+<script src="/js/i18n.js"></script>
+<script>
+document.addEventListener('i18n-ready', function() {
+  const inputs = [
+    'oldMpg', 'oldPayment', 'gasPrice', 
+    'newMpg', 'newPayment', 'milesPerMonth'
+  ];
+
+  function calculate() {
+    const oldMpg = parseFloat(document.getElementById('oldMpg').value) || 1;
+    const oldPay = parseFloat(document.getElementById('oldPayment').value) || 0;
+    const gasPrice = parseFloat(document.getElementById('gasPrice').value) || 0;
+    const newMpg = parseFloat(document.getElementById('newMpg').value) || 1;
+    const newPay = parseFloat(document.getElementById('newPayment').value) || 0;
+    const miles = parseFloat(document.getElementById('milesPerMonth').value) || 0;
+
+    const oldFuelCost = (miles / oldMpg) * gasPrice;
+    const newFuelCost = (miles / newMpg) * gasPrice;
+    const savings = oldFuelCost - newFuelCost;
+
+    const netOld = oldPay + oldFuelCost;
+    const netNew = newPay + newFuelCost;
+    const totalDiff = netNew - netOld;
+
+    const currency = t('js.currencySymbol', '$');
+    document.getElementById('savingsValue').textContent = currency + Math.abs(savings).toFixed(2);
+    
+    if (savings >= 0) {
+      document.getElementById('summaryTitle').textContent = "Monthly Fuel Savings";
+      document.getElementById('summaryNote').textContent = `By leasing the new car, you'd save ${currency}${savings.toFixed(2)} on gas per month.`;
+    } else {
+      document.getElementById('summaryTitle').textContent = "Extra Fuel Cost";
+      document.getElementById('summaryNote').textContent = `The new car actually costs ${currency}${Math.abs(savings).toFixed(2)} MORE in gas.`;
+    }
+  }
+
+  inputs.forEach(id => {
+    document.getElementById(id).addEventListener('input', calculate);
+  });
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('active');
+    });
+  });
+
+  calculate();
+});
+</script>
+</body>
+</html>
