@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys, json; print(json.load(sys.stdin)['choices'][0]['message']['content'])
+                            ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+KeyError: 'choices'

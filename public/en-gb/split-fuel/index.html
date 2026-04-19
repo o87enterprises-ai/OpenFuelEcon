@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1A5F3F">
+  <title>Fuel Economy Calculator - Save on Petrol | FuelEcon UK</title>
+  <meta name="description" content="Calculate fuel costs in pounds, compare vehicle efficiency, and find fuel-saving tips for UK drivers.">
+  <link rel="canonical" href="https://fuelecon.pages.dev/">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FuelEcon">
+  <meta property="og:title" content="Fuel Economy Calculator - Save on Petrol | FuelEcon UK">
+  <meta property="og:description" content="Calculate fuel costs in pounds, compare vehicle efficiency, and find fuel-saving tips for UK drivers.">
+  <meta property="og:url" content="https://fuelecon.pages.dev/split-fuel/">
+
+  <!-- Icons + fonts -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/static.css">
+
+  <!-- WebApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "FuelEcon Split Fuel Calculator",
+    "description": "Divide total trip gas cost among multiple people.",
+    "url": "https://fuelecon.pages.dev/split-fuel/",
+    "applicationCategory": "UtilitiesApplication"
+  }
+  </script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "o87 Enterprises / TruegleAi",
+    "url": "https://fuelecon.pages.dev",
+    "sameAs": [
+      "https://github.com/o87enterprises-ai",
+      "https://github.com/TruegleAi"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@trumpafi.online"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+        <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="geo.position" content="37.0902;-95.7129" />
+    <meta name="ICBM" content="37.0902, -95.7129" />
+        <meta name="currency-symbol" content="£" />
+<script>
+  window.FUELECON_LOCALE = "en-us";
+  window.FUELECON_STRINGS = {"tips": ["🌿 Below 50 mph, crack windows instead of A/C — A/C can cost 3-4 MPG Imp.", "🛣️ Steady 55-65 mph on the freeway is the MPG Imp sweet spot for most cars.", "📦 Roof racks tank fuel economy — take them off when you're not using them.", "⛽ Cruise control on flat highway = 7-14% MPG Imp improvement.", "🔧 A clogged air filter can cost you 10% MPG Imp. Change it when dirty.", "🚗 Combine errands — cold starts use 2x more fuel per mile than warm driving.", "🕐 Idling over 30 seconds burns more gas than restarting the engine.", "🏔️ Drive down hills in gear, not neutral — modern cars cut fuel when engine-braking."], "widget": {"liveMpg": "Live MPG Imp", "lastTrip": "Last trip", "fuelUsed": "Fuel used", "premiumBadge": "Premium · live metrics"}, "greenZone": {"active": "🟢 GREEN ZONE · peak efficiency", "moderate": "🟡 Moderate — easy win available", "poor": "🔴 High consumption — check route & tires"}, "ecoAdvice": {"highwaySaving": "🛣️ Take the freeway if you can — you'd save about ${savings} on this exact trip.", "highwayOk": "✅ Highway route — already the cheapest option for fuel.", "tiresLow": "⚠️ Your tires are low. Inflating them is free and gives you back about 8% MPG Imp.", "acceleration": "📉 Smooth acceleration = 10-30% less fuel over a tank."}, "savedVehicles": {"placeholder": "No saved cars yet — hit \"Save this car\" above."}, "currencySymbol": "£", "maps": {"origin_label": "From", "dest_label": "To", "origin_placeholder": "Start location (city, address)", "dest_placeholder": "Destination", "find_routes": "Find routes", "routes_title": "Available routes", "fastest": "Fastest", "shortest": "Shortest", "cheapest": "Cheapest", "directions_title": "Turn-by-turn directions", "show_directions": "Show directions", "hide_directions": "Hide directions", "show_stations": "Show fuel stations", "hide_stations": "Hide fuel stations", "stations_title": "Gas stations along your route", "station_price": "Price", "premium_gate_title": "Unlock Detailed Route Analysis", "premium_gate_desc": "Get turn-by-turn directions, live fuel prices along your route, and sync to your live widget.", "premium_watch_ad": "Watch 30-second ad", "premium_watch_ad_sub": "Unlock for 24 hours • No signup", "premium_join_waitlist": "Join premium waitlist", "premium_join_waitlist_sub": "Get early access • No credit card required", "premium_cancel": "Not now — basic route only", "premium_note": "Free users still see total cost and distance. Premium unlocks the full breakdown.", "premium_teaser": "Premium feature: See gas prices along your route. [Unlock]", "premium_unlock_link": "Unlock", "email_placeholder": "you@example.com", "email_submit": "Join waitlist", "email_thanks": "Thanks! You're on the waitlist.", "ad_stub_message": "Rewarded ad would play here — unlocking for 24h", "distance_unit": "mi", "volume_unit": "gal", "origin_dest_needed": "Please enter both origin and destination", "finding_routes": "Finding routes...", "route_label": "Route", "no_directions": "No detailed directions available.", "no_routes_found": "No routes found", "no_routes_error": "Could not find routes. Please try different addresses."}, "mpgConverter": {"conversion_factor": 235.215, "title": "MPG Imp ⇄ L/100km Converter", "description": "Convert between miles per gallon (MPG Imp) and liters per 100 km (L/100km).", "heading": "Fuel Economy Unit Converter", "input_label": "Enter value", "direction_mpg_to_l": "MPG Imp → L/100km", "direction_l_to_mpg": "L/100km → MPG Imp", "result_label": "Result", "explanation_heading": "What does this mean?", "explanation_body": "MPG Imp (miles per gallon) is used in the US. L/100km is used in most other countries. Lower L/100km is better; higher MPG Imp is better.", "formula_mpg_to_l": "L/100km = {factor} ÷ MPG Imp", "formula_l_to_mpg": "MPG Imp = {factor} ÷ L/100km", "note_units": "This conversion uses the standard factor of {factor}."}, "common": {"gas_price_default": 3.65}, "evVsGas": {"title": "EV vs Gas Break-Even Calculator", "description": "Find out when an electric vehicle pays for itself compared to a gas car.", "heading": "Is an EV Worth It?", "label_daily_miles": "Daily miles driven", "label_years": "Years to own", "label_ev_premium": "EV purchase premium (£)", "label_elec_price": "Electricity cost (£/kWh)", "label_gas_price": "Gas price (£/gal or equivalent)", "label_gas_mpg": "Gas car MPG Imp", "label_ev_mpge": "EV efficiency (MPG Impe)", "result_break_even_years": "Break-even in {years} years ({months} months)", "result_never": "EV never pays back under these assumptions", "result_explanation": "At the break-even point, fuel savings equal the EV's higher upfront cost.", "chart_label_ev": "EV total cost", "chart_label_gas": "Gas car total cost", "chart_label_time": "Time (months)", "chart_label_cost": "Total cost (£)"}, "commuteCost": {"title": "Commute Cost Calculator", "description": "Find out how much your daily commute costs each week, month, and year.", "heading": "What does your commute cost?", "label_distance": "One-way distance", "label_mpg": "Vehicle MPG Imp", "label_gas_price": "Gas price", "label_days": "Days per week", "label_weeks": "Weeks per year", "weekly": "Weekly cost", "monthly": "Monthly cost", "annual": "Annual cost", "total_liters": "Total fuel per year", "unit_distance": "miles", "weekly_note": "≈ {weekly} per week", "monthly_note": "≈ {monthly} per month", "annual_note": "≈ {annual} per year"}};
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FuelEcon",
+  "alternateName": "Fuel Economy Calculator",
+  "url": "https://fuelecon.pages.dev/",
+  "inLanguage": "en-us",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://fuelecon.pages.dev/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FuelEcon United States",
+  "url": "https://fuelecon.pages.dev/",
+  "logo": "https://fuelecon.pages.dev/favicon.svg",
+  "sameAs": [
+    "https://github.com/o87enterprises-ai",
+    "https://github.com/TruegleAi"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@trumpafi.online",
+    "contactType": "customer support"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  },
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Credit Card, Debit Card, PayPal"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does FuelEcon calculate trip costs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We take your vehicle's MPG Imp, the total distance of your trip, and the current gas price to work out exactly how many liters you'll need and what they will cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'Effective MPG Imp'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your car has a base MPG Imp, but things like low tire pressure or driving on back roads instead of the highway make it less efficient. Effective MPG Imp is what your car is actually getting on that specific drive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are these estimates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are very close for most drivers! We use official EPA data for vehicle averages and live gas prices. However, things like heavy cargo, aggressive driving, or very cold weather can change your real results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does tire pressure matter for gas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Low tires create more 'rolling resistance,' meaning your engine has to work harder to move the car. Keeping them inflated to the recommended level can save you about 3% to 10% on gas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it better to drive with windows down or A/C on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Below 50 mph, windows down is usually better. At highway speeds, the 'drag' from open windows actually costs more gas than running the A/C."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save by driving slower?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most cars, gas mileage drops significantly above 60 mph. Every 5 mph you drive over 60 is like paying an extra £0.20 to £0.30 per gallon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does idling use a lot of gas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you are stopped for more than 30 seconds (and not in traffic), it's usually cheaper to turn the engine off and restart it than to let it idle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use cruise control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On flat highways, yes. It helps maintain a steady speed, which is much more efficient than constant micro-adjustments with your foot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do roof racks affect fuel economy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They break the aerodynamic shape of your car. Even an empty roof rack can reduce your MPG Imp by 2% to 5% because of wind resistance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 'Green Zone'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Green Zone is our way of showing you're driving at peak efficiency. When your route and tires are optimized, you're in the Green Zone!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I save my car for later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use the 'Save this car' button to keep your vehicle's info in your browser so you don't have to type it in next time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you get gas prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use weekly averages from the U.S. Energy Information Administration (EIA) for the US, and similar official sources for other regions."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Calculate Trip Gas Cost",
+  "description": "Calculate the exact cost of your next trip based on your car's fuel economy and current gas prices.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Select your vehicle",
+      "text": "Pick your car from our presets or enter your own MPG Imp manually.",
+      "url": "https://fuelecon.pages.dev#vehicle-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Enter trip distance",
+      "text": "Type in your trip distance in miles or use the slider.",
+      "url": "https://fuelecon.pages.dev#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Choose your route type",
+      "text": "Select whether you'll be driving on highways or back roads for a more accurate estimate.",
+      "url": "https://fuelecon.pages.dev#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "See your results",
+      "text": "Your total trip cost and fuel needed will update instantly in the results panel.",
+      "url": "https://fuelecon.pages.dev#resultPanel"
+    }
+  ]
+}
+</script>
+        <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="geo.position" content="37.0902;-95.7129" />
+    <meta name="ICBM" content="37.0902, -95.7129" />
+        <meta name="currency-symbol" content="£" />
+<script>
+  window.FUELECON_LOCALE = "en-us";
+  window.FUELECON_STRINGS = {"tips": ["🌿 Below 50 mph, crack windows instead of A/C — A/C can cost 3-4 MPG Imp.", "🛣️ Steady 55-65 mph on the freeway is the MPG Imp sweet spot for most cars.", "📦 Roof racks tank fuel economy — take them off when you're not using them.", "⛽ Cruise control on flat highway = 7-14% MPG Imp improvement.", "🔧 A clogged air filter can cost you 10% MPG Imp. Change it when dirty.", "🚗 Combine errands — cold starts use 2x more fuel per mile than warm driving.", "🕐 Idling over 30 seconds burns more gas than restarting the engine.", "🏔️ Drive down hills in gear, not neutral — modern cars cut fuel when engine-braking."], "widget": {"liveMpg": "Live MPG Imp", "lastTrip": "Last trip", "fuelUsed": "Fuel used", "premiumBadge": "Premium · live metrics"}, "greenZone": {"active": "🟢 GREEN ZONE · peak efficiency", "moderate": "🟡 Moderate — easy win available", "poor": "🔴 High consumption — check route & tires"}, "ecoAdvice": {"highwaySaving": "🛣️ Take the freeway if you can — you'd save about ${savings} on this exact trip.", "highwayOk": "✅ Highway route — already the cheapest option for fuel.", "tiresLow": "⚠️ Your tires are low. Inflating them is free and gives you back about 8% MPG Imp.", "acceleration": "📉 Smooth acceleration = 10-30% less fuel over a tank."}, "savedVehicles": {"placeholder": "No saved cars yet — hit \"Save this car\" above."}, "currencySymbol": "£", "maps": {"origin_label": "From", "dest_label": "To", "origin_placeholder": "Start location (city, address)", "dest_placeholder": "Destination", "find_routes": "Find routes", "routes_title": "Available routes", "fastest": "Fastest", "shortest": "Shortest", "cheapest": "Cheapest", "directions_title": "Turn-by-turn directions", "show_directions": "Show directions", "hide_directions": "Hide directions", "show_stations": "Show fuel stations", "hide_stations": "Hide fuel stations", "stations_title": "Gas stations along your route", "station_price": "Price", "premium_gate_title": "Unlock Detailed Route Analysis", "premium_gate_desc": "Get turn-by-turn directions, live fuel prices along your route, and sync to your live widget.", "premium_watch_ad": "Watch 30-second ad", "premium_watch_ad_sub": "Unlock for 24 hours • No signup", "premium_join_waitlist": "Join premium waitlist", "premium_join_waitlist_sub": "Get early access • No credit card required", "premium_cancel": "Not now — basic route only", "premium_note": "Free users still see total cost and distance. Premium unlocks the full breakdown.", "premium_teaser": "Premium feature: See gas prices along your route. [Unlock]", "premium_unlock_link": "Unlock", "email_placeholder": "you@example.com", "email_submit": "Join waitlist", "email_thanks": "Thanks! You're on the waitlist.", "ad_stub_message": "Rewarded ad would play here — unlocking for 24h", "distance_unit": "mi", "volume_unit": "gal", "origin_dest_needed": "Please enter both origin and destination", "finding_routes": "Finding routes...", "route_label": "Route", "no_directions": "No detailed directions available.", "no_routes_found": "No routes found", "no_routes_error": "Could not find routes. Please try different addresses."}, "mpgConverter": {"conversion_factor": 235.215, "title": "MPG Imp ⇄ L/100km Converter", "description": "Convert between miles per gallon (MPG Imp) and liters per 100 km (L/100km).", "heading": "Fuel Economy Unit Converter", "input_label": "Enter value", "direction_mpg_to_l": "MPG Imp → L/100km", "direction_l_to_mpg": "L/100km → MPG Imp", "result_label": "Result", "explanation_heading": "What does this mean?", "explanation_body": "MPG Imp (miles per gallon) is used in the US. L/100km is used in most other countries. Lower L/100km is better; higher MPG Imp is better.", "formula_mpg_to_l": "L/100km = {factor} ÷ MPG Imp", "formula_l_to_mpg": "MPG Imp = {factor} ÷ L/100km", "note_units": "This conversion uses the standard factor of {factor}."}, "common": {"gas_price_default": 3.65}, "evVsGas": {"title": "EV vs Gas Break-Even Calculator", "description": "Find out when an electric vehicle pays for itself compared to a gas car.", "heading": "Is an EV Worth It?", "label_daily_miles": "Daily miles driven", "label_years": "Years to own", "label_ev_premium": "EV purchase premium (£)", "label_elec_price": "Electricity cost (£/kWh)", "label_gas_price": "Gas price (£/gal or equivalent)", "label_gas_mpg": "Gas car MPG Imp", "label_ev_mpge": "EV efficiency (MPG Impe)", "result_break_even_years": "Break-even in {years} years ({months} months)", "result_never": "EV never pays back under these assumptions", "result_explanation": "At the break-even point, fuel savings equal the EV's higher upfront cost.", "chart_label_ev": "EV total cost", "chart_label_gas": "Gas car total cost", "chart_label_time": "Time (months)", "chart_label_cost": "Total cost (£)"}, "commuteCost": {"title": "Commute Cost Calculator", "description": "Find out how much your daily commute costs each week, month, and year.", "heading": "What does your commute cost?", "label_distance": "One-way distance", "label_mpg": "Vehicle MPG Imp", "label_gas_price": "Gas price", "label_days": "Days per week", "label_weeks": "Weeks per year", "weekly": "Weekly cost", "monthly": "Monthly cost", "annual": "Annual cost", "total_liters": "Total fuel per year", "unit_distance": "miles", "weekly_note": "≈ {weekly} per week", "monthly_note": "≈ {monthly} per month", "annual_note": "≈ {annual} per year"}};
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FuelEcon",
+  "alternateName": "Fuel Economy Calculator",
+  "url": "https://fuelecon.com/",
+  "inLanguage": "en-us",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://fuelecon.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FuelEcon United States",
+  "url": "https://fuelecon.com/",
+  "logo": "https://fuelecon.com/favicon.svg",
+  "sameAs": [
+    "https://github.com/o87enterprises-ai",
+    "https://github.com/TruegleAi"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@trumpafi.online",
+    "contactType": "customer support"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  },
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Credit Card, Debit Card, PayPal"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does FuelEcon calculate trip costs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We take your vehicle's MPG Imp, the total distance of your trip, and the current gas price to work out exactly how many liters you'll need and what they will cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'Effective MPG Imp'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your car has a base MPG Imp, but things like low tire pressure or driving on back roads instead of the highway make it less efficient. Effective MPG Imp is what your car is actually getting on that specific drive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are these estimates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are very close for most drivers! We use official EPA data for vehicle averages and live gas prices. However, things like heavy cargo, aggressive driving, or very cold weather can change your real results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does tire pressure matter for gas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Low tires create more 'rolling resistance,' meaning your engine has to work harder to move the car. Keeping them inflated to the recommended level can save you about 3% to 10% on gas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it better to drive with windows down or A/C on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Below 50 mph, windows down is usually better. At highway speeds, the 'drag' from open windows actually costs more gas than running the A/C."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save by driving slower?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most cars, gas mileage drops significantly above 60 mph. Every 5 mph you drive over 60 is like paying an extra £0.20 to £0.30 per gallon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does idling use a lot of gas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you are stopped for more than 30 seconds (and not in traffic), it's usually cheaper to turn the engine off and restart it than to let it idle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use cruise control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On flat highways, yes. It helps maintain a steady speed, which is much more efficient than constant micro-adjustments with your foot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do roof racks affect fuel economy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They break the aerodynamic shape of your car. Even an empty roof rack can reduce your MPG Imp by 2% to 5% because of wind resistance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 'Green Zone'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Green Zone is our way of showing you're driving at peak efficiency. When your route and tires are optimized, you're in the Green Zone!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I save my car for later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use the 'Save this car' button to keep your vehicle's info in your browser so you don't have to type it in next time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you get gas prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use weekly averages from the U.S. Energy Information Administration (EIA) for the US, and similar official sources for other regions."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Calculate Trip Gas Cost",
+  "description": "Calculate the exact cost of your next trip based on your car's fuel economy and current gas prices.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Select your vehicle",
+      "text": "Pick your car from our presets or enter your own MPG Imp manually.",
+      "url": "https://fuelecon.com#vehicle-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Enter trip distance",
+      "text": "Type in your trip distance in miles or use the slider.",
+      "url": "https://fuelecon.com#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Choose your route type",
+      "text": "Select whether you'll be driving on highways or back roads for a more accurate estimate.",
+      "url": "https://fuelecon.com#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "See your results",
+      "text": "Your total trip cost and fuel needed will update instantly in the results panel.",
+      "url": "https://fuelecon.com#resultPanel"
+    }
+  ]
+}
+</script>
+        <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="geo.position" content="37.0902;-95.7129" />
+    <meta name="ICBM" content="37.0902, -95.7129" />
+        <meta name="currency-symbol" content="£" />
+<script>
+  window.FUELECON_LOCALE = "en-us";
+  window.FUELECON_STRINGS = {"tips": ["🌿 Below 50 mph, crack windows instead of A/C — A/C can cost 3-4 MPG Imp.", "🛣️ Steady 55-65 mph on the freeway is the MPG Imp sweet spot for most cars.", "📦 Roof racks tank fuel economy — take them off when you're not using them.", "⛽ Cruise control on flat highway = 7-14% MPG Imp improvement.", "🔧 A clogged air filter can cost you 10% MPG Imp. Change it when dirty.", "🚗 Combine errands — cold starts use 2x more fuel per mile than warm driving.", "🕐 Idling over 30 seconds burns more gas than restarting the engine.", "🏔️ Drive down hills in gear, not neutral — modern cars cut fuel when engine-braking."], "widget": {"liveMpg": "Live MPG Imp", "lastTrip": "Last trip", "fuelUsed": "Fuel used", "premiumBadge": "Premium · live metrics"}, "greenZone": {"active": "🟢 GREEN ZONE · peak efficiency", "moderate": "🟡 Moderate — easy win available", "poor": "🔴 High consumption — check route & tires"}, "ecoAdvice": {"highwaySaving": "🛣️ Take the freeway if you can — you'd save about ${savings} on this exact trip.", "highwayOk": "✅ Highway route — already the cheapest option for fuel.", "tiresLow": "⚠️ Your tires are low. Inflating them is free and gives you back about 8% MPG Imp.", "acceleration": "📉 Smooth acceleration = 10-30% less fuel over a tank."}, "savedVehicles": {"placeholder": "No saved cars yet — hit \"Save this car\" above."}, "currencySymbol": "£", "maps": {"origin_label": "From", "dest_label": "To", "origin_placeholder": "Start location (city, address)", "dest_placeholder": "Destination", "find_routes": "Find routes", "routes_title": "Available routes", "fastest": "Fastest", "shortest": "Shortest", "cheapest": "Cheapest", "directions_title": "Turn-by-turn directions", "show_directions": "Show directions", "hide_directions": "Hide directions", "show_stations": "Show fuel stations", "hide_stations": "Hide fuel stations", "stations_title": "Gas stations along your route", "station_price": "Price", "premium_gate_title": "Unlock Detailed Route Analysis", "premium_gate_desc": "Get turn-by-turn directions, live fuel prices along your route, and sync to your live widget.", "premium_watch_ad": "Watch 30-second ad", "premium_watch_ad_sub": "Unlock for 24 hours • No signup", "premium_join_waitlist": "Join premium waitlist", "premium_join_waitlist_sub": "Get early access • No credit card required", "premium_cancel": "Not now — basic route only", "premium_note": "Free users still see total cost and distance. Premium unlocks the full breakdown.", "premium_teaser": "Premium feature: See gas prices along your route. [Unlock]", "premium_unlock_link": "Unlock", "premium_price_trial": "£0.99", "premium_trial_label": "Special Trial Rate", "premium_btn_unlock": "Unlock Premium · £0.99", "premium_success": "Premium Unlocked! Enjoy your live dashboard.", "email_placeholder": "you@example.com", "email_submit": "Join waitlist", "email_thanks": "Thanks! You're on the waitlist.", "ad_stub_message": "Rewarded ad would play here — unlocking for 24h", "distance_unit": "mi", "volume_unit": "gal", "origin_dest_needed": "Please enter both origin and destination", "finding_routes": "Finding routes...", "route_label": "Route", "no_directions": "No detailed directions available.", "no_routes_found": "No routes found", "no_routes_error": "Could not find routes. Please try different addresses.", "status_geocoding": "Looking up locations...", "status_routing": "Calculating routes...", "status_processing": "Processing..."}, "mpgConverter": {"conversion_factor": 235.215, "title": "MPG Imp ⇄ L/100km Converter", "description": "Convert between miles per gallon (MPG Imp) and liters per 100 km (L/100km).", "heading": "Fuel Economy Unit Converter", "input_label": "Enter value", "direction_mpg_to_l": "MPG Imp → L/100km", "direction_l_to_mpg": "L/100km → MPG Imp", "result_label": "Result", "explanation_heading": "What does this mean?", "explanation_body": "MPG Imp (miles per gallon) is used in the US. L/100km is used in most other countries. Lower L/100km is better; higher MPG Imp is better.", "formula_mpg_to_l": "L/100km = {factor} ÷ MPG Imp", "formula_l_to_mpg": "MPG Imp = {factor} ÷ L/100km", "note_units": "This conversion uses the standard factor of {factor}."}, "common": {"gas_price_default": 3.65}, "evVsGas": {"title": "EV vs Gas Break-Even Calculator", "description": "Find out when an electric vehicle pays for itself compared to a gas car.", "heading": "Is an EV Worth It?", "label_daily_miles": "Daily miles driven", "label_years": "Years to own", "label_ev_premium": "EV purchase premium (£)", "label_elec_price": "Electricity cost (£/kWh)", "label_gas_price": "Gas price (£/gal or equivalent)", "label_gas_mpg": "Gas car MPG Imp", "label_ev_mpge": "EV efficiency (MPG Impe)", "result_break_even_years": "Break-even in {years} years ({months} months)", "result_never": "EV never pays back under these assumptions", "result_explanation": "At the break-even point, fuel savings equal the EV's higher upfront cost.", "chart_label_ev": "EV total cost", "chart_label_gas": "Gas car total cost", "chart_label_time": "Time (months)", "chart_label_cost": "Total cost (£)"}, "commuteCost": {"title": "Commute Cost Calculator", "description": "Find out how much your daily commute costs each week, month, and year.", "heading": "What does your commute cost?", "label_distance": "One-way distance", "label_mpg": "Vehicle MPG Imp", "label_gas_price": "Gas price", "label_days": "Days per week", "label_weeks": "Weeks per year", "weekly": "Weekly cost", "monthly": "Monthly cost", "annual": "Annual cost", "total_liters": "Total fuel per year", "unit_distance": "miles", "weekly_note": "≈ {weekly} per week", "monthly_note": "≈ {monthly} per month", "annual_note": "≈ {annual} per year"}};
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FuelEcon",
+  "alternateName": "Fuel Economy Calculator",
+  "url": "https://fuelecon.pages.dev/",
+  "inLanguage": "en-us",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://fuelecon.pages.dev/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FuelEcon United States",
+  "url": "https://fuelecon.pages.dev/",
+  "logo": "https://fuelecon.pages.dev/favicon.svg",
+  "sameAs": [
+    "https://github.com/o87enterprises-ai",
+    "https://github.com/TruegleAi"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@trumpafi.online",
+    "contactType": "customer support"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  },
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Credit Card, Debit Card, PayPal"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does FuelEcon calculate trip costs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We take your vehicle's MPG Imp, the total distance of your trip, and the current gas price to work out exactly how many liters you'll need and what they will cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'Effective MPG Imp'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your car has a base MPG Imp, but things like low tire pressure or driving on back roads instead of the highway make it less efficient. Effective MPG Imp is what your car is actually getting on that specific drive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are these estimates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are very close for most drivers! We use official EPA data for vehicle averages and live gas prices. However, things like heavy cargo, aggressive driving, or very cold weather can change your real results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does tire pressure matter for gas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Low tires create more 'rolling resistance,' meaning your engine has to work harder to move the car. Keeping them inflated to the recommended level can save you about 3% to 10% on gas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it better to drive with windows down or A/C on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Below 50 mph, windows down is usually better. At highway speeds, the 'drag' from open windows actually costs more gas than running the A/C."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save by driving slower?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most cars, gas mileage drops significantly above 60 mph. Every 5 mph you drive over 60 is like paying an extra £0.20 to £0.30 per gallon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does idling use a lot of gas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you are stopped for more than 30 seconds (and not in traffic), it's usually cheaper to turn the engine off and restart it than to let it idle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use cruise control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On flat highways, yes. It helps maintain a steady speed, which is much more efficient than constant micro-adjustments with your foot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do roof racks affect fuel economy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They break the aerodynamic shape of your car. Even an empty roof rack can reduce your MPG Imp by 2% to 5% because of wind resistance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 'Green Zone'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Green Zone is our way of showing you're driving at peak efficiency. When your route and tires are optimized, you're in the Green Zone!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I save my car for later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use the 'Save this car' button to keep your vehicle's info in your browser so you don't have to type it in next time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you get gas prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use weekly averages from the U.S. Energy Information Administration (EIA) for the US, and similar official sources for other regions."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Calculate Trip Gas Cost",
+  "description": "Calculate the exact cost of your next trip based on your car's fuel economy and current gas prices.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Select your vehicle",
+      "text": "Pick your car from our presets or enter your own MPG Imp manually.",
+      "url": "https://fuelecon.pages.dev#vehicle-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Enter trip distance",
+      "text": "Type in your trip distance in miles or use the slider.",
+      "url": "https://fuelecon.pages.dev#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Choose your route type",
+      "text": "Select whether you'll be driving on highways or back roads for a more accurate estimate.",
+      "url": "https://fuelecon.pages.dev#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "See your results",
+      "text": "Your total trip cost and fuel needed will update instantly in the results panel.",
+      "url": "https://fuelecon.pages.dev#resultPanel"
+    }
+  ]
+}
+</script>
+<script>
+  window.FUELECON_LOCALE = "en-gb";
+  window.FUELECON_STRINGS = {"tips": ["🌿 Below 50 mph, open windows instead of A/C — A/C can cost 3-4 MPG Imp.", "🛣️ Steady 55-65 mph on the motorway is the MPG Imp sweet spot for most cars.", "📦 Roof racks tank fuel economy — take them off when you're not using them.", "⛽ Cruise control on flat motorway = 7-14% MPG Imp improvement.", "🔧 A clogged air filter can cost you 10% MPG Imp. Change it when dirty.", "🚗 Combine errands — cold starts use 2x more fuel per mile than warm driving.", "🕐 Idling over 30 seconds burns more fuel than restarting the engine.", "🏔️ Drive down hills in gear, not neutral — modern cars cut fuel when engine-braking."], "widget": {"liveMpg": "Live MPG Imp", "lastTrip": "Last trip", "fuelUsed": "Fuel used", "premiumBadge": "Premium · live metrics"}, "greenZone": {"active": "🟢 GREEN ZONE · peak efficiency", "moderate": "🟡 Moderate — easy win available", "poor": "🔴 High consumption — check route & tyres"}, "ecoAdvice": {"highwaySaving": "🛣️ Take the motorway if you can — you'd save about £${savings} on this exact trip.", "highwayOk": "✅ Motorway route — already the cheapest option for fuel.", "tiresLow": "⚠️ Your tyres are low. Inflating them is free and gives you back about 8% MPG Imp.", "acceleration": "📉 Smooth acceleration = 10-30% less fuel over a tank."}, "savedVehicles": {"placeholder": "No saved cars yet — hit \"Save this car\" above."}, "currencySymbol": "£", "maps": {"origin_label": "From", "dest_label": "To", "origin_placeholder": "Start location (city, address)", "dest_placeholder": "Destination", "find_routes": "Find routes", "routes_title": "Available routes", "fastest": "Fastest", "shortest": "Shortest", "cheapest": "Cheapest", "directions_title": "Turn-by-turn directions", "show_directions": "Show directions", "hide_directions": "Hide directions", "show_stations": "Show fuel stations", "hide_stations": "Hide fuel stations", "stations_title": "Gas stations along your route", "station_price": "Price", "premium_gate_title": "Unlock Detailed Route Analysis", "premium_gate_desc": "Get turn-by-turn directions, live fuel prices along your route, and sync to your live widget.", "premium_watch_ad": "Watch 30-second ad", "premium_watch_ad_sub": "Unlock for 24 hours • No signup", "premium_join_waitlist": "Join premium waitlist", "premium_join_waitlist_sub": "Get early access • No credit card required", "premium_cancel": "Not now — basic route only", "premium_note": "Free users still see total cost and distance. Premium unlocks the full breakdown.", "premium_teaser": "Premium feature: See gas prices along your route. [Unlock]", "premium_unlock_link": "Unlock", "premium_price_trial": "£0.99", "premium_trial_label": "Special Trial Rate", "premium_btn_unlock": "Unlock Premium · £0.99", "premium_success": "Premium Unlocked! Enjoy your live dashboard.", "email_placeholder": "you@example.com", "email_submit": "Join waitlist", "email_thanks": "Thanks! You're on the waitlist.", "ad_stub_message": "Rewarded ad would play here — unlocking for 24h", "distance_unit": "mi", "volume_unit": "L", "origin_dest_needed": "Please enter both origin and destination", "finding_routes": "Finding routes...", "route_label": "Route", "no_directions": "No detailed directions available.", "no_routes_found": "No routes found", "no_routes_error": "Could not find routes. Please try different addresses.", "status_geocoding": "Looking up locations...", "status_routing": "Calculating routes...", "status_processing": "Processing..."}, "mpgConverter": {"conversion_factor": 282.481, "title": "MPG Imp ⇄ L/100km Converter", "description": "Convert between MPG Imp (Imperial) and liters per 100 km.", "heading": "Fuel Economy Unit Converter", "input_label": "Enter value", "direction_mpg_to_l": "MPG Imp → L/100km", "direction_l_to_mpg": "L/100km → MPG Imp", "result_label": "Result", "explanation_heading": "What does this mean?", "explanation_body": "UK uses Imperial liters; our converter uses the correct UK conversion factor.", "formula_mpg_to_l": "L/100km = {factor} ÷ MPG Imp", "formula_l_to_mpg": "MPG Imp = {factor} ÷ L/100km", "note_units": "UK gallon (Imperial) differs from US gallon."}, "common": {"gas_price_default": 1.45}, "evVsGas": {"title": "EV vs Gas Break-Even Calculator", "description": "Find out when an electric vehicle pays for itself compared to a gas car.", "heading": "Is an EV Worth It?", "label_daily_miles": "Daily miles driven", "label_years": "Years to own", "label_ev_premium": "EV purchase premium (£)", "label_elec_price": "Electricity cost (£/kWh)", "label_gas_price": "Gas price (£/gal or equivalent)", "label_gas_mpg": "Gas car MPG Imp", "label_ev_mpge": "EV efficiency (MPG Impe)", "result_break_even_years": "Break-even in {years} years ({months} months)", "result_never": "EV never pays back under these assumptions", "result_explanation": "At the break-even point, fuel savings equal the EV's higher upfront cost.", "chart_label_ev": "EV total cost", "chart_label_gas": "Gas car total cost", "chart_label_time": "Time (months)", "chart_label_cost": "Total cost (£)"}, "commuteCost": {"title": "Commute Cost Calculator", "description": "Find out how much your daily commute costs each week, month, and year.", "heading": "What does your commute cost?", "label_distance": "One-way distance", "label_mpg": "Vehicle MPG Imp", "label_gas_price": "Gas price", "label_days": "Days per week", "label_weeks": "Weeks per year", "weekly": "Weekly cost", "monthly": "Monthly cost", "annual": "Annual cost", "total_liters": "Total fuel per year", "unit_distance": "miles", "weekly_note": "≈ {weekly} per week", "monthly_note": "≈ {monthly} per month", "annual_note": "≈ {annual} per year"}};
+</script>
+  <!-- HREFLANG_BLOCK -->
+  <link rel="alternate" hreflang="en-us" href="https://fuelecon.pages.dev/" />
+  <link rel="alternate" hreflang="en-au" href="https://fuelecon.pages.dev/en-au/" />
+  <link rel="alternate" hreflang="en-ca" href="https://fuelecon.pages.dev/en-ca/" />
+  <link rel="alternate" hreflang="en-gb" href="https://fuelecon.pages.dev/en-gb/" />
+  <link rel="alternate" hreflang="x-default" href="https://fuelecon.pages.dev/" />
+        <meta name="geo.region" content="GB" />
+    <meta name="geo.placename" content="United Kingdom" />
+    <meta name="geo.position" content="55.3781;-3.4360" />
+    <meta name="ICBM" content="55.3781, -3.4360" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FuelEcon",
+  "alternateName": "Fuel Economy Calculator",
+  "url": "https://fuelecon.pages.dev/en-gb/",
+  "inLanguage": "en-gb",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://fuelecon.pages.dev/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FuelEcon United Kingdom",
+  "url": "https://fuelecon.pages.dev/en-gb/",
+  "logo": "https://fuelecon.pages.dev/favicon.svg",
+  "sameAs": [
+    "https://github.com/o87enterprises-ai",
+    "https://github.com/TruegleAi"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@trumpafi.online",
+    "contactType": "customer support"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "GB"
+  },
+  "currenciesAccepted": "GBP",
+  "paymentAccepted": "Credit Card, Debit Card, PayPal"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does FuelEcon calculate trip costs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We take your vehicle's MPG Imp, the total distance of your trip, and the current petrol price to work out exactly how many litres you'll need and what they will cost."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'Effective MPG Imp'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your car has a base MPG Imp, but things like low tyre pressure or driving on B-roads instead of the motorway make it less efficient. Effective MPG Imp is what your car is actually getting on that specific drive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate are these estimates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are very close for most drivers! We use official data for vehicle averages and live petrol prices. However, things like heavy cargo, aggressive driving, or very cold weather can change your real results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does tyre pressure matter for fuel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Low tyres create more 'rolling resistance,' meaning your engine has to work harder to move the car. Keeping them inflated to the recommended level can save you about 3% to 10% on fuel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it better to drive with windows down or A/C on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Below 50 mph, windows down is usually better. At motorway speeds, the 'drag' from open windows actually costs more fuel than running the A/C."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save by driving slower?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most cars, fuel economy drops significantly above 60 mph. Every 5 mph you drive over 60 is like paying an extra 5-10p per litre."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does idling use a lot of fuel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you are stopped for more than 30 seconds (and not in traffic), it's usually cheaper to turn the engine off and restart it than to let it idle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use cruise control?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On flat motorways, yes. It helps maintain a steady speed, which is much more efficient than constant micro-adjustments with your foot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do roof racks affect fuel economy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They break the aerodynamic shape of your car. Even an empty roof rack can reduce your MPG Imp by 2% to 5% because of wind resistance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 'Green Zone'?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Green Zone is our way of showing you're driving at peak efficiency. When your route and tyres are optimised, you're in the Green Zone!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I save my car for later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Use the 'Save this car' button to keep your vehicle's info in your browser so you don't have to type it in next time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do you get petrol prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use weekly averages from official UK sources like the RAC and GOV.UK."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Calculate Trip Petrol Cost",
+  "description": "Calculate the exact cost of your next trip based on your car's fuel economy and current gas prices.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Select your vehicle",
+      "text": "Pick your car from our presets or enter your own MPG Imp manually.",
+      "url": "https://fuelecon.pages.dev#vehicle-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Enter trip distance",
+      "text": "Type in your trip distance in miles or use the slider.",
+      "url": "https://fuelecon.pages.dev#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Choose your route type",
+      "text": "Select whether you'll be driving on highways or back roads for a more accurate estimate.",
+      "url": "https://fuelecon.pages.dev#trip-card"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "See your results",
+      "text": "Your total trip cost and fuel needed will update instantly in the results panel.",
+      "url": "https://fuelecon.pages.dev#resultPanel"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="container">
+
+  <header class="site-header">
+    <a href="/" class="brand-link">
+      <h1 class="brand"><i class="fas fa-leaf"></i> FuelEcon</h1>
+      <span class="tagline">Fuel economy for dummies</span>
+    </a>
+    <nav class="site-nav">
+      <a href="/">Calculator</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <h1 id="pageTitle">Split Fuel Cost</h1>
+    <p class="lead" id="pageDesc">Divide trip gas cost among riders.</p>
+  </section>
+
+  <article class="prose">
+    <div class="converter-card">
+      <div class="split-form">
+        <div class="form-group">
+          <label for="splitTotal" id="labelTotal">Total trip cost</label>
+          <input type="number" id="splitTotal" placeholder="0.00" step="0.01" min="0">
+        </div>
+
+        <div class="form-group">
+          <label for="splitPeople" id="labelPeople">Number of people</label>
+          <input type="number" id="splitPeople" value="2" min="2" step="1">
+        </div>
+
+        <div class="result-box">
+          <span id="perPersonLabel">Each person pays</span>
+          <span id="splitResult" class="result-value">—</span>
+          <button type="button" id="copySplitBtn" class="copy-btn">
+            <i class="fas fa-copy"></i> <span id="copyBtnText">Copy</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <h3>How it works</h3>
+      <p id="explanationText">Fair split based on total fuel cost; adjust driver share if needed.</p>
+      <p class="note">Example: £85 total ÷ 4 people = <strong>£21.25 each</strong>. No more awkward math at the gas station.</p>
+    </div>
+  </article>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>FuelEcon</h4>
+        <p style="max-width: 300px; font-size: 0.82rem; line-height: 1.55;">
+          Plain-English tools for figuring out what driving actually costs.
+          Built by drivers, for drivers.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <a href="/">Trip cost calculator</a>
+        <a href="/mpg-converter/">MPG Imp ⇄ L/100km</a>
+        <a href="/split-fuel/" class="active">Split fuel cost</a>
+        <a href="/ev-vs-gas/">EV vs gas break-even</a>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="/about/">About FuelEcon</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of use</a>
+        <a href="/disclosure/">Ad disclosure</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      © 2026 FuelEcon · Published by o87 Enterprises / TruegleAi · Estimates only — your mileage may vary (literally).
+    </div>
+  </footer>
+
+</div>
+
+<script src="/js/i18n.js"></script>
+<script>
+document.addEventListener('i18n-ready', function() {
+  document.getElementById('pageTitle').textContent = t('splitFuel.title', 'Split Fuel Cost');
+  document.getElementById('pageDesc').textContent = t('splitFuel.description', 'Divide trip gas cost among riders.');
+  document.getElementById('labelTotal').textContent = t('splitFuel.label_total', 'Total trip cost');
+  document.getElementById('labelPeople').textContent = t('splitFuel.label_people', 'Number of people');
+  document.getElementById('perPersonLabel').textContent = t('splitFuel.per_person', 'Each person pays');
+  document.getElementById('copyBtnText').textContent = t('splitFuel.copy_button', 'Copy');
+  document.getElementById('explanationText').textContent = t('splitFuel.explanation', 'Fair split based on total fuel cost; adjust driver share if needed.');
+
+  var totalInput = document.getElementById('splitTotal');
+  var peopleInput = document.getElementById('splitPeople');
+  var resultSpan = document.getElementById('splitResult');
+  var copyBtn = document.getElementById('copySplitBtn');
+  var copyBtnText = document.getElementById('copyBtnText');
+  var currencySymbol = window.FUELECON_STRINGS.currencySymbol || '£';
+
+  function computeSplit() {
+    var total = parseFloat(totalInput.value) || 0;
+    var people = Math.max(2, parseInt(peopleInput.value) || 2);
+    var per = total / people;
+    resultSpan.textContent = currencySymbol + per.toFixed(2) + ' each';
+  }
+
+  totalInput.addEventListener('input', computeSplit);
+  peopleInput.addEventListener('input', computeSplit);
+
+  copyBtn.addEventListener('click', function() {
+    navigator.clipboard.writeText(resultSpan.textContent).then(function() {
+      var originalText = copyBtnText.textContent;
+      copyBtnText.textContent = t('splitFuel.copied', 'Copied!');
+      setTimeout(function() {
+        copyBtnText.textContent = originalText;
+      }, 2000);
+    });
+  });
+});
+</script>
+</body>
+</html>

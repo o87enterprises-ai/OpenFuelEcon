@@ -69,6 +69,50 @@ def layout(slug: str, title: str, description: str, body_html: str) -> str:
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/css/static.css">
+  <!-- Organization Schema for AdSense publisher identity -->
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{ENTITY}",
+    "url": "{SITE_URL}",
+    "logo": "{SITE_URL}/favicon.svg",
+    "sameAs": [
+      "https://github.com/o87enterprises-ai",
+      "https://github.com/TruegleAi"
+    ],
+    "contactPoint": {{
+      "@type": "ContactPoint",
+      "email": "{CONTACT_EMAIL}",
+      "contactType": "customer support"
+    }},
+    "address": {{
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    }}
+  }}
+  </script>
+
+  <!-- WebPage Schema with author and datePublished -->
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "{title}",
+    "description": "{description}",
+    "url": "{canonical}",
+    "author": {{
+      "@type": "Organization",
+      "name": "{ENTITY}"
+    }},
+    "publisher": {{
+      "@type": "Organization",
+      "name": "{ENTITY}"
+    }},
+    "datePublished": "2026-04-18",
+    "dateModified": "2026-04-18"
+  }}
+  </script>
 </head>
 <body>
 <div class="container">

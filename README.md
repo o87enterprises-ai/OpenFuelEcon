@@ -197,6 +197,30 @@ API keys issued via a dev portal (coming). Free tier generous, paid tier for hig
 
 ---
 
+## ⛽ Gas Price Data
+
+Static gas price data for route cost calculations and fuel station overlays:
+
+| File | Regions | Unit | Currency |
+|------|---------|------|----------|
+| `data/gas-prices-us.json` | 50 states + DC | USD/gal | USD |
+| `data/gas-prices-uk.json` | 4 nations | GBP/L | GBP |
+| `data/gas-prices-ca.json` | 13 provinces/territories | CAD/L | CAD |
+| `data/gas-prices-au.json` | 8 states/territories | AUD/L | AUD |
+
+**Index file:** `data/gas-prices.json` maps locale codes to their data file.
+
+Data format: `{ "region_code": price, ... }` (e.g., `{"CA": 4.82, "TX": 3.12}`).
+
+These files are embedded in the site and used by:
+- Region selector dropdown (override default gas price)
+- Maps fuel station overlay (MAPS5)
+- API endpoint `/api/gas-price/:region`
+
+**Future automation:** A GitHub Action will fetch latest EIA/GOV.UK data monthly and regenerate these JSONs automatically.
+
+---
+
 ## 🧠 MCP server (Phase 3)
 
 Add FuelEcon to any MCP-compatible AI assistant (Claude Desktop, Claude Code, Cursor, etc.):

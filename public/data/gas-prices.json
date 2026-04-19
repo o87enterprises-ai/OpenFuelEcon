@@ -1,0 +1,26 @@
+{
+  "en-us": {
+    "dataFile": "gas-prices-us.json",
+    "unit": "gal",
+    "currency": "USD",
+    "country": "United States"
+  },
+  "en-gb": {
+    "dataFile": "gas-prices-uk.json",
+    "unit": "L",
+    "currency": "GBP",
+    "country": "United Kingdom"
+  },
+  "en-ca": {
+    "dataFile": "gas-prices-ca.json",
+    "unit": "L",
+    "currency": "CAD",
+    "country": "Canada"
+  },
+  "en-au": {
+    "dataFile": "gas-prices-au.json",
+    "unit": "L",
+    "currency": "AUD",
+    "country": "Australia"
+  }
+}
