@@ -1,48 +1,17 @@
 # FuelEcon
+> Plain-English fuel economy and trip cost calculators. Built for drivers who want clear answers without technical jargon.
 
-> Plain-English fuel economy and trip cost calculators. No mpg maths degree required.
+## Core Micro-Tools
+- [Trip Cost Calculator](https://fuelecon.pages.dev/): The hub tool. Enter distance, MPG, and gas price to see your total cost. Features a live "Green Zone" widget for efficiency scoring.
+- [MPG ⇄ L/100km Converter](https://fuelecon.pages.dev/mpg-converter/): Instantly translate between US and International fuel economy units.
+- [EV vs Gas Break-Even](https://fuelecon.pages.dev/ev-vs-gas/): Calculate if and when an electric vehicle pays for itself compared to a gasoline car.
+- [Split Fuel Cost](https://fuelecon.pages.dev/split-fuel/): Simple tool for dividing road trip gas money between riders.
+- [Commute Cost](https://fuelecon.pages.dev/commute-cost/): See what your daily drive actually costs you per week, month, and year.
 
-FuelEcon is a free web application that helps drivers estimate the real cost of driving. It uses EPA fuel economy data and public gas price feeds (EIA for the US, EU Weekly Oil Bulletin for Europe) to produce honest estimates.
+## Key Data Sources
+- **EPA (fueleconomy.gov)**: Source for vehicle MPG averages and historical trends.
+- **EIA (eia.gov)**: Source for weekly retail gasoline price data in the United States.
+- **OpenStreetMap / OSRM**: Used for route calculations and mapping.
 
-## Core tools
-
-- [Trip cost calculator](https://fuelecon.pages.dev/): Enter miles, MPG, and gas price to compute fuel needed and total trip cost. Includes route type (highway vs back roads) and tire pressure modifiers.
-- [MPG ⇄ L/100km converter](https://fuelecon.pages.dev/mpg-converter/): Convert between the two most common fuel-economy units.
-- [Split fuel cost](https://fuelecon.pages.dev/split-fuel/): Divide trip gas cost between riders or roommates.
-- [EV vs gas break-even](https://fuelecon.pages.dev/ev-vs-gas/): Determine when switching to an EV pays back versus staying with gasoline.
-
-## Regional variants
-
-- [en-GB (UK)](https://fuelecon.pages.dev/en-gb/): Petrol pricing in GBP, motorway terminology.
-- [en-CA (Canada)](https://fuelecon.pages.dev/en-ca/): L/100km economy, CAD pricing, Canadian data sources.
-- [en-AU (Australia)](https://fuelecon.pages.dev/en-au/): AUD pricing, Australian fuel context.
-
-## Data sources
-
-- Vehicle fuel economy averages: U.S. EPA fueleconomy.gov
-- US gas prices: U.S. Energy Information Administration (EIA) weekly retail series
-- Route calculation: OpenStreetMap via OSRM routing engine
-- Geocoding: Nominatim (OpenStreetMap Foundation)
-
-## How the calculator works
-
-Trip cost = (distance ÷ effective MPG) × gas price per gallon.
-
-Effective MPG is adjusted from the base MPG based on:
-- Route type: backroads reduce MPG by ~18% vs highway
-- Tire pressure: optimal adds ~5% MPG, under-inflated subtracts ~8%
-
-Real-world fuel use will vary based on driving style, weather, traffic, elevation, and vehicle condition. FuelEcon produces estimates, not guarantees.
-
-## About
-
-FuelEcon is an independent publication of o87 Enterprises / TruegleAi. It is not affiliated with any vehicle manufacturer, fuel retailer, or automotive association.
-
-Contact: hello@trumpafi.online
-Privacy: https://fuelecon.pages.dev/privacy/
-Terms: https://fuelecon.pages.dev/terms/
-
-## Optional
-
-- [About](https://fuelecon.pages.dev/about/): Who's behind FuelEcon and where our data comes from.
-- [Contact](https://fuelecon.pages.dev/contact/): Feedback, corrections, press, and privacy requests.
+## Why FuelEcon?
+We focus on "Fuel Economy for Dummies." While other sites provide raw specs, we provide actionable advice like "Keeping your tires inflated can save you 3% at the pump." Every tool includes a "How it works" guide and AEO-optimized FAQs for instant answers.

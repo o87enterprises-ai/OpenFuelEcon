@@ -24,17 +24,17 @@ SITE_URL = "https://preview.fuelecon.pages.dev"
 API_VERSION = "1"
 
 # --------------------------------------------------------
-# Phase 3 additions (uncomment when Worker API lands)
+# Phase 3 additions (D1 Database and KV Cache)
 # --------------------------------------------------------
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "fuelecon-db"
-# database_id = "REPLACE_WITH_D1_ID_FROM_DASHBOARD"
-# migrations_dir = "./schema"
+[[d1_databases]]
+binding = "DB"
+database_name = "fuelecon-db"
+database_id = "79957c86-6186-4db0-ade1-71b85311e9ed"
+migrations_dir = "./schema"
 
-# [[kv_namespaces]]
-# binding = "CACHE"
-# id = "REPLACE_WITH_KV_ID"
+[[kv_namespaces]]
+binding = "CACHE"
+id = "61b2c2c891b84b668f43aaeb8195081f"
 
 # --------------------------------------------------------
 # Phase 4 addition (daily maintenance agent)
