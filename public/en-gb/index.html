@@ -218,6 +218,34 @@
     }
 
     /* ---------- Inputs ---------- */
+    .suggestions-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1.5px solid var(--c-border);
+      border-top: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      z-index: 1000;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .suggestions-list li {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .suggestions-list li:hover {
+      background: var(--c-tip-bg);
+    }
+    .input-group { position: relative; }
     .input-group {
       display: flex;
       flex-direction: column;
@@ -3040,11 +3068,13 @@
           <div class="row-2">
             <div class="input-group">
               <label for="originInput"></label>
-              <input type="text" id="originInput" value="Downtown">
+              <input type="text" id="originInput" value="Downtown" autocomplete="off">
+              <ul id="originSuggestions" class="suggestions-list"></ul>
             </div>
             <div class="input-group">
               <label for="destInput"></label>
-              <input type="text" id="destInput" value="Airport">
+              <input type="text" id="destInput" value="Airport" autocomplete="off">
+              <ul id="destSuggestions" class="suggestions-list"></ul>
             </div>
           </div>
           <button id="findRoutesBtn" class="amber"></button>
@@ -4026,7 +4056,7 @@
   // Show directions for a route (called after premium check passes)
   function showDirectionsForRoute(index) {
     const route = currentRoutes[index];
-    if (!route) return;
+    if (!route || !route.geometry || !route.geometry.coordinates) return;
 
     // Clear old route layers
     clearRouteLayers();
@@ -4040,7 +4070,7 @@
 
     // Draw other routes faded
     currentRoutes.forEach((r, i) => {
-      if (i !== index) {
+      if (i !== index && r.geometry && r.geometry.coordinates) {
         drawRoute(r.geometry, '#999', 3);
       }
     });
@@ -4076,6 +4106,58 @@
     // Update stations for this route
     updateStationsForRoute(route);
   }
+
+  // Autocomplete Logic
+  function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
+
+  async function handleAutocomplete(input, listId) {
+    const query = input.value.trim();
+    const list = document.getElementById(listId);
+    if (query.length < 3) {
+      list.style.display = 'none';
+      return;
+    }
+
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5`;
+      const res = await fetch(url);
+      const data = await res.json();
+      
+      list.innerHTML = '';
+      if (data.length > 0) {
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.display_name;
+          li.addEventListener('click', () => {
+            input.value = item.display_name;
+            list.style.display = 'none';
+          });
+          list.appendChild(li);
+        });
+        list.style.display = 'block';
+      } else {
+        list.style.display = 'none';
+      }
+    } catch (err) {
+      console.error('Autocomplete error:', err);
+    }
+  }
+
+  originInput.addEventListener('input', debounce((e) => handleAutocomplete(e.target, 'originSuggestions'), 300));
+  destInput.addEventListener('input', debounce((e) => handleAutocomplete(e.target, 'destSuggestions'), 300));
+
+  // Close suggestions on click outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.input-group')) {
+      document.querySelectorAll('.suggestions-list').forEach(list => list.style.display = 'none');
+    }
+  });
 
   // Render turn-by-turn directions
   function renderDirections(route) {
