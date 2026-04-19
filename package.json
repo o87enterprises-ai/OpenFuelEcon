@@ -33,7 +33,7 @@
     "url": "https://github.com/o87enterprises-ai/fuelecon.git"
   },
   "devDependencies": {
-    "wrangler": "^3.80.0"
+    "wrangler": "^4.83.0"
   },
   "engines": {
     "node": ">=18.0.0"

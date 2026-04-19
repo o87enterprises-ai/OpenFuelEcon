@@ -27,30 +27,41 @@ async function updateGasPrices(env: Env) {
     return;
   }
 
-  console.log("Fetching latest gas prices from EIA...");
+  console.log("Fetching latest Weekly Retail Gasoline prices from EIA...");
 
   try {
-    // EIA API v2 endpoint for Weekly Retail Gasoline Prices
-    // This is a stub for the real API call structure
-    const url = `https://api.eia.gov/v2/total-energy/data/?api_key=${env.EIA_API_KEY}&frequency=weekly&data[]=value&facets[series][]=RU_E_GAS_P_GAL_US`;
-    
-    const response = await fetch(url);
-    const data: any = await response.json();
+    // EIA API v2: Weekly Retail Gasoline (National Average)
+    // Series: EMM_EPMR_PTE_NUS_DPG (Regular Gasoline, All Formulations)
+    const url = new URL("https://api.eia.gov/v2/petroleum/pri/gnd/data/");
+    url.searchParams.set("api_key", env.EIA_API_KEY);
+    url.searchParams.set("frequency", "weekly");
+    url.searchParams.set("data[]", "value");
+    url.searchParams.set("facets[series][]", "EMM_EPMR_PTE_NUS_DPG");
+    url.searchParams.set("sort[0][column]", "period");
+    url.searchParams.set("sort[0][direction]", "desc");
+    url.searchParams.set("length", "1");
 
-    if (data.response && data.response.data) {
-      const latest = data.response.data[0];
+    const response = await fetch(url.toString());
+    const result: any = await response.json();
+
+    if (result.response && result.response.data && result.response.data.length > 0) {
+      const latest = result.response.data[0];
       const price = parseFloat(latest.value);
+      const date = latest.period;
 
-      // Update D1 Cache
+      // Update D1 Cache for US-AVG
       await env.DB.prepare(
-        "INSERT INTO gas_prices_cache (region_code, price, currency) VALUES (?, ?, ?) ON CONFLICT(region_code) DO UPDATE SET price = excluded.price, updated_at = CURRENT_TIMESTAMP"
+        "INSERT INTO gas_prices_cache (region_code, price, currency) VALUES (?, ?, ?) " +
+        "ON CONFLICT(region_code) DO UPDATE SET price = excluded.price, updated_at = CURRENT_TIMESTAMP"
       )
         .bind("US-AVG", price, "USD")
         .run();
         
-      console.log(`Successfully updated US-AVG gas price to $${price}`);
+      console.log(`[Success] Updated US-AVG to $${price} (Reported for: ${date})`);
+    } else {
+      console.warn("EIA API returned empty data for the requested series.");
     }
   } catch (err) {
-    console.error("Failed to update gas prices:", err);
+    console.error("EIA Update Failed:", err);
   }
 }
