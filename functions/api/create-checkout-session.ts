@@ -1,11 +1,11 @@
 interface Env {
   STRIPE_SECRET_KEY: string;
   STRIPE_PRODUCT_ID: string;
-  SITE_URL: string;
+  FUELECON_SITE_URL: string;
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { STRIPE_SECRET_KEY, STRIPE_PRODUCT_ID, SITE_URL } = context.env;
+  const { STRIPE_SECRET_KEY, STRIPE_PRODUCT_ID, FUELECON_SITE_URL } = context.env;
 
   if (!STRIPE_SECRET_KEY || !STRIPE_PRODUCT_ID) {
     return new Response(JSON.stringify({ error: 'Stripe configuration missing' }), {
@@ -17,10 +17,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     // We use the Stripe REST API directly to avoid large node_modules in the worker
     const params = new URLSearchParams();
-    params.append('success_url', `${SITE_URL || 'https://fuelecon.pages.dev'}/?premium=success`);
-    params.append('cancel_url', `${SITE_URL || 'https://fuelecon.pages.dev'}/`);
-    params.append('mode', 'payment');
-    params.append('line_items[0][price]', STRIPE_PRODUCT_ID); // In Stripe, Product ID for checkout is usually the Price ID
+    params.append('success_url', `${FUELECON_SITE_URL || 'https://fuelecon.pages.dev'}/?premium=success`);
+    params.append('cancel_url', `${FUELECON_SITE_URL || 'https://fuelecon.pages.dev'}/`);
+    params.append('mode', 'subscription');
+    params.append('line_items[0][price]', STRIPE_PRODUCT_ID);
     params.append('line_items[0][quantity]', '1');
 
     const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
